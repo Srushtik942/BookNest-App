@@ -29,8 +29,6 @@ const Mainbody = () => {
   { id: 2, title: "Book Two", author: "Author Two", img: Read },
   { id: 3, title: "Book Three", author: "Author Three", img: Read },
   { id: 4, title: "Book Four", author: "Author Four", img: Read },
-
-
 ]
 
   return (
@@ -44,7 +42,7 @@ const Mainbody = () => {
       </div>
 
       {/* Two-column section: text left, images right */}
-      <div className='w-full flex flex-wrap items-start px-12 gap-12'>
+      <div className='w-full flex flex-wrap items-start px-30 gap-12'>
         {/* Left column: Text */}
         <div className='flex-1 min-w-[300px]'>
           <h2 className='playfair-heading text-gray-900 text-7xl text-left'>

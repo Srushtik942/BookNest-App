@@ -2,15 +2,18 @@ import './App.css'
 import Navbar from "./components/Navbar"
 import Mainbody from "./components/Mainbody"
 import Footer from "./components/footer"
-
+import ProductList from "./pages/ProductList"
+import { Outlet } from 'react-router-dom'
 function App() {
 
   return (
     <>
 <Navbar/>
  <div className='pt-32'>
-    <Mainbody />
+    <Outlet />
+   
   </div>
+  {/* <ProductList/> */}
   <Footer/>
     </>
   )

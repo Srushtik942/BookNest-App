@@ -1,20 +1,21 @@
 import React from 'react'
 import { FiShoppingCart } from "react-icons/fi";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <div className=" top-0 left-0 w-full rounded-b-sm py-5 shadow-sm bg-yellow-50 z-50">
+    <div className=" top-0 left-0 w-full rounded-b-sm py-5 shadow-sm  z-50">
       <nav className="flex items-center justify-between mx-5">
 
         {/* Menu items */}
-        <ul className="flex gap-8 text-gray-800 font-semibold text-xl">
-          <li className='cursor-pointer hover:text-amber-500'>Home</li>
-          <li className='cursor-pointer hover:text-amber-500 '>About</li>
-          <li className='cursor-pointer hover:text-amber-500'>Blogs</li>
+        <ul className="flex gap-8 text-black font-semibold text-xl">
+          <li className='  cursor-pointer hover:text-amber-800'><Link to="/">Home</Link></li>
+          <li className='  cursor-pointer hover:text-amber-800 '><Link to ="/products">Products</Link> </li>
+          <li className='  cursor-pointer hover:text-amber-800'>Blogs</li>
         </ul>
 
         {/* Logo / Brand name */}
-        <h3 className='text-gray-800 text-4xl font-stretch-110%  font-semibold '>Welcome to KitabKart.com!</h3>
+        <h3 className='playfair-heading  text-gray-800 text-4xl font-stretch-110%  font-semibold '>Welcome to KitabKart.com!</h3>
 
         {/* Search input + Cart */}
         <div className='flex items-center gap-4'>
