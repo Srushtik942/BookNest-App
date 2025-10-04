@@ -9,9 +9,9 @@ function App() {
   return (
     <>
 <Navbar/>
- <div className='pt-32'>
+ <div className='pt-15'>
     <Outlet />
-   
+
   </div>
   {/* <ProductList/> */}
   <Footer/>
