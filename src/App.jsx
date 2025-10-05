@@ -9,7 +9,7 @@ function App() {
   return (
     <>
 <Navbar/>
- <div className='pt-15'>
+ <div className='pt-13'>
     <Outlet />
 
   </div>

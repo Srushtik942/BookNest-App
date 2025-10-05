@@ -20,26 +20,26 @@ const Mainbody = () => {
     {
       icon: FiTruck,
       title: "Shipping",
-      description: "Free, fast, and reliable worldwide"
-    },
-  ];
+ description: "Free, fast, and reliable worldwide"
+ },
+ ];
 
-  const books = [
-  { id: 1, title: "Book One", author: "Author One", img: Read },
-  { id: 2, title: "Book Two", author: "Author Two", img: Read },
-  { id: 3, title: "Book Three", author: "Author Three", img: Read },
-  { id: 4, title: "Book Four", author: "Author Four", img: Read },
+ const books = [
+ { id: 1, title: "Book One", author: "Author One", img: Read },
+ { id: 2, title: "Book Two", author: "Author Two", img: Read },
+ { id: 3, title: "Book Three", author: "Author Three", img: Read },
+ { id: 4, title: "Book Four", author: "Author Four", img: Read },
 ]
 
-  return (
+ return (
 <div className='flex flex-col items-center px-5 gap-10 mb-1 w-full'>
-      <div className='flex flex-wrap justify-center gap-5 mb-5'>
-        {["Fiction", "Non-Fiction", "Sci-Fi", "Comics", "Thriller"].map(cat => (
-          <div key={cat} className='py-2 rounded-xl bg-yellow-800 text-xl p-5 w-fit cursor-pointer hover:bg-amber-900'>
-            <h1>{cat}</h1>
-          </div>
-        ))}
-      </div>
+ <div className='flex flex-wrap justify-center gap-5 mb-5'>
+ {["Fiction", "Non-Fiction", "Sci-Fi", "Comics", "Thriller"].map(cat => (
+ <div key={cat} className='py-2 rounded-xl bg-yellow-800 text-xl p-5 w-fit cursor-pointer hover:bg-amber-900'>
+ <h1>{cat}</h1>
+</div>
+))}
+ </div>
 
       {/* Two-column section: text left, images right */}
       <div className='w-full flex flex-wrap items-start px-30 gap-12'>
@@ -51,9 +51,9 @@ const Mainbody = () => {
             Books
           </h2>
           <p className='text-black bg-amber-100 w-fit my-5 rounded-xl px-5 py-3'>
-            Discover our hand-picked collection of exclusive titles,<br/>
+               Discover our hand-picked collection of exclusive titles,<br/>
             carefully curated to spark your imagination and elevate<br />
-             your reading experience. Dive into stories you won’t<br />
+             your reading experience. Dive into stories you won't<br />
               find anywhere else.
           </p>
         <div>
@@ -81,25 +81,25 @@ const Mainbody = () => {
         </div>
 
      <div className='w-full flex justify-center py-16'>
-    {/* The main card container */}
+    {/* card container */}
     <div className='bg-white shadow-xl rounded-2xl p-8 max-w-4xl w-full'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8 divide-x divide-gray-200'>
 
-            {/* Column 1: Certified */}
+            {/*  Certified */}
             <div className='flex flex-col items-center text-center px-4'>
                 <FiCheckCircle size={24} className="text-yellow-800 mb-3" />
                 <h4 className='font-bold text-lg text-gray-800 mb-1'>Certified</h4>
                 <p className='text-sm text-gray-500'>Available certificates of the authority</p>
             </div>
 
-            {/* Column 2: Secure */}
+            {/* Secure */}
             <div className='flex flex-col items-center text-center px-4 md:pl-8'>
                 <FiLock size={24} className="text-yellow-800 mb-3" />
                 <h4 className='font-bold text-lg text-gray-800 mb-1'>Secure</h4>
                 <p className='text-sm text-gray-500'>Secure certificates of the authority</p>
             </div>
 
-            {/* Column 3: Shipping*/}
+            {/*  Shipping*/}
             <div className='flex flex-col items-center text-center px-4 md:pl-8'>
                 <FiTruck size={24} className="text-yellow-800 mb-3" />
                 <h4 className='font-bold text-lg text-gray-800 mb-1'>Shipping</h4>
@@ -119,7 +119,7 @@ const Mainbody = () => {
             <h4 className='text-gray-700 font-semibold'>{book.title}</h4>
             <p className='text-gray-700 text-sm mb-2'>by {book.author}</p>
             <button className='text-white bg-amber-400 px-4 py-1 rounded-xl hover:bg-amber-500 cursor-pointer'>
-              Buy Now +
+              Buy Now 
             </button>
           </div>
         ))}
@@ -138,7 +138,7 @@ const Mainbody = () => {
             <div className='flex flex-row gap-6 my-6'>
               <p className='text-gray-800'>₹ 1000</p>
             <button className='text-white bg-amber-800 px-3 py-1 rounded-xl hover:bg-amber-900 cursor-pointer'>
-              Buy Now +
+              Buy Now
             </button>
             </div>
 

@@ -4,7 +4,8 @@ import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider  } from 'react-router-dom'
 import ProductList from './pages/ProductList.jsx'
- import Mainbody from './components/Mainbody.jsx'
+import Mainbody from './components/Mainbody.jsx'
+import ProductDetails from "./pages/ProductDetails.jsx"
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
        path : "products",
        element: <ProductList/>
+      },
+      {
+        path:"productDetails",
+        element:<ProductDetails/>
       }
     ]
   }

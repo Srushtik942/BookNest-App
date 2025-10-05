@@ -26,16 +26,12 @@ const ProductList = ({isWished}) => {
       {/* best selling books */}
       <div className='w-3/4'>
 
-        {/* FIXED: Removed 'pt-5'. The 'Showing All Books' heading now starts at the top
-          of the w-3/4 div, flush with the top of the Sidebar content.
-          Use 'pb-4' for bottom spacing.
-        */}
         <h2 className='text-gray-700 pb-4 text-3xl playfair-heading  text-center mb-10'>Showing All Books</h2>
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-10 max-w-7xl mx-auto'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-10 max-w-7xl mx-auto '>
           {books.map(book => (
-            <div key={book.id} className=' rounded-2xl shadow-lg flex flex-col items-center justify-center p-4'>
-              <img className='h-50 w-50 rounded-2xl mb-3' src={Read} alt={book.title}/>
+            <div key={book.id} className=' rounded-2xl shadow-lg flex flex-col items-center justify-center p-4 hover:bg-amber-300'>
+              <img className='h-50 w-50 rounded-2xl mb-3  ' src={Read} alt={book.title}/>
               <h4 className='text-gray-700 font-semibold'>{book.title}</h4>
               <p className='text-gray-700 text-sm mb-2'>by {book.author}</p>
               <div className='flex flex-row gap-6 my-6'>

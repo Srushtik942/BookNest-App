@@ -2,7 +2,6 @@ import React from 'react'
 
 const Sidebar = () => {
     return (
-        // Keep 'p-4' on the container for general padding
         <div className='p-4'>
             <div className='flex justify-between border-b border-gray-300'>
                 <h2 className='font-bold text-gray-800 text-2xl pb-3  text-left'>
@@ -17,7 +16,7 @@ const Sidebar = () => {
             </div>
 
 
-            {/* --- Category Filters --- */}
+            {/* Category Filters*/}
             <div>
                 <div className='my-5'>
                     <h2 className='text-gray-900 font-bold text-xl'>Category</h2>
@@ -37,11 +36,10 @@ const Sidebar = () => {
                     </div>
                 </div>
 
-                {/* --- Rating Slider --- */}
+                {/* rate Slider */}
                 <div className='mt-8 my-10'>
                     <h2 className='text-xl font-bold text-gray-900 mb-4 my-5'>Rating</h2>
 
-                    {/* The HTML Range Input */}
                     <div className='flex flex-col items-center'>
                         <input
                             type='range'
@@ -54,7 +52,6 @@ const Sidebar = () => {
                             className='w-full h-2 bg-amber-200 rounded-lg appearance-none cursor-pointer range-lg accent-amber-600'
                         />
 
-                        {/* Display the selected value (you'll use state for a live update) */}
                         <div className='w-full flex justify-between text-sm text-gray-600 mt-2'>
                             <span>1 Star</span>
                             <span>5 Stars</span>
