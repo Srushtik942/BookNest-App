@@ -1,10 +1,15 @@
 import React from 'react'
 import { FiShoppingCart } from "react-icons/fi";
 import {FaHeart, FaRegHeart} from "react-icons/fa"
-
+import { FaMapLocation } from 'react-icons/fa6';
+import AddressManagement from '../pages/AddressManagement';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const Navbar = () => {
+  const userName = "Srushti"
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <div className=" top-0 left-0 w-full rounded-b-sm py-5 shadow-sm  z-50">
       <nav className="flex items-center justify-between mx-5">
@@ -14,11 +19,20 @@ const Navbar = () => {
           <li className='  cursor-pointer hover:text-amber-800'><Link to="/">Home</Link></li>
           <li className='  cursor-pointer hover:text-amber-800 '><Link to ="/products">Products</Link> </li>
           <li className='  cursor-pointer hover:text-amber-800'><Link to="/wishlist">Wishlist</Link></li>
-          <li className='cursor-pointer hover:text-amber-800'><Link to="/cartPage">Cart</Link></li>
+          {/* <li className='cursor-pointer hover:text-amber-800'><Link to="/cartPage">Cart</Link></li> */}
+          <li className='cursor-pointer hover:text-amber-800'>
+             <button
+              className="flex items-center gap-2 cursor-pointer hover:text-amber-800"
+              onClick={() => setShowModal(true)}
+            >
+              <FaMapLocation className='text-lg' />
+              Deliver to {userName}
+            </button>
+          </li>
         </ul>
 
         {/*   name */}
-        <h3 className='playfair-heading  text-gray-800 text-4xl font-stretch-110%  font-semibold '> KitabKart.com!</h3>
+        <h3 className='playfair-heading  text-gray-800 text-4xl font-stretch-110%  font-semibold '> KitabKart.com</h3>
 
         {/* Search  */}
         <div className='flex items-center gap-4'>
@@ -40,7 +54,9 @@ const Navbar = () => {
 
           {/* Cart Icon */}
           <button className="relative">
+            <Link to="/cartPage">
             <FiShoppingCart size={30} className="text-gray-800 hover:text-amber-700" />
+            </Link>
 
             {/* Badge for cart count */}
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
@@ -50,6 +66,10 @@ const Navbar = () => {
 
         </div>
       </nav>
+      {/* modal */}
+       {showModal && (
+        <AddressManagement onClose={() => setShowModal(false)} />
+      )}
     </div>
   )
 }

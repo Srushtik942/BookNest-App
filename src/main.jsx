@@ -8,6 +8,7 @@ import Mainbody from './components/Mainbody.jsx'
 import ProductDetails from "./pages/ProductDetails.jsx"
 import WishlistPage from "./pages/WishlistPage.jsx"
 import CartPage from "./pages/CartPage.jsx"
+import AddressManagement from "./pages/AddressManagement.jsx"
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path:"cartPage",
         element:<CartPage/>
+      },
+      {
+        path:"address",
+        element:<AddressManagement/>
       }
     ]
   }

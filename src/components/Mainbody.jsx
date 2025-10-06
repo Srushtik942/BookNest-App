@@ -2,9 +2,11 @@ import React from 'react'
 import Read from "../assets/read.png"
 import Girls from "../assets/girls.png"
 import { FiArrowDownRight , FiCheckCircle, FiLock, FiTruck } from 'react-icons/fi';
+import AddressManagement from '../pages/AddressManagement';
 
 
 const Mainbody = () => {
+
 
    const features = [
     {
@@ -119,7 +121,7 @@ const Mainbody = () => {
             <h4 className='text-gray-700 font-semibold'>{book.title}</h4>
             <p className='text-gray-700 text-sm mb-2'>by {book.author}</p>
             <button className='text-white bg-amber-400 px-4 py-1 rounded-xl hover:bg-amber-500 cursor-pointer'>
-              Buy Now 
+              Buy Now
             </button>
           </div>
         ))}
