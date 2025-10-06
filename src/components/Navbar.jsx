@@ -13,7 +13,8 @@ const Navbar = () => {
         <ul className="flex gap-8 text-black font-semibold text-xl">
           <li className='  cursor-pointer hover:text-amber-800'><Link to="/">Home</Link></li>
           <li className='  cursor-pointer hover:text-amber-800 '><Link to ="/products">Products</Link> </li>
-          <li className='  cursor-pointer hover:text-amber-800'>Blogs</li>
+          <li className='  cursor-pointer hover:text-amber-800'><Link to="/wishlist">Wishlist</Link></li>
+          <li className='cursor-pointer hover:text-amber-800'><Link to="/cartPage">Cart</Link></li>
         </ul>
 
         {/*   name */}
