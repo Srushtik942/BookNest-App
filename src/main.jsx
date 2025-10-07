@@ -9,6 +9,8 @@ import ProductDetails from "./pages/ProductDetails.jsx"
 import WishlistPage from "./pages/WishlistPage.jsx"
 import CartPage from "./pages/CartPage.jsx"
 import AddressManagement from "./pages/AddressManagement.jsx"
+import Address from './components/Address.jsx'
+import NewAddress from "./components/NewAddress.jsx"
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,14 @@ const router = createBrowserRouter([
       {
         path:"address",
         element:<AddressManagement/>
+      },
+      {
+        path:"addAddress",
+        element:<Address/>
+      },
+      {
+        path:"newAddress",
+        element:<NewAddress/>
       }
     ]
   }

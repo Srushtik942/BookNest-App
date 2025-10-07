@@ -1,32 +1,36 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useAddress } from "../context/AddressContext";
 
 const AddressManagement = ({onClose }) => {
   const [selected, setSelected] = useState(null);
+  const navigate  = useNavigate();
+  const { addresses } = useAddress();
 
-  const addresses = [
-    {
-      id: 1,
-      name: "Srushti Kulkarni",
-      address:
-        "D Block, Bhagayshree Nagar Society, Upper Indira Nagar, Pune, MAHARASHTRA 411037",
-      default: true,
-    },
-    {
-      id: 2,
-      name: "Srushti Kulkarni",
-      address:
-        "Flat no.04 Madhumalti Appt. Lashkar, Solapur, MAHARASHTRA 413003",
-      default: false,
-    },
-    {
-      id: 3,
-      name: "Srushti Satish Kulkarni",
-      address:
-        "Flat no.04 Madhumalti Appartment, South Sadar Bazar, Solapur, MAHARASHTRA 413003",
-      default: false,
-    },
-  ];
+  // const addresses = [
+  //   {
+  //     id: 1,
+  //     name: "Srushti Kulkarni",
+  //     address:
+  //       "D Block, Bhagayshree Nagar Society, Upper Indira Nagar, Pune, MAHARASHTRA 411037",
+  //     default: true,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Srushti Kulkarni",
+  //     address:
+  //       "Flat no.04 Madhumalti Appt. Lashkar, Solapur, MAHARASHTRA 413003",
+  //     default: false,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Srushti Satish Kulkarni",
+  //     address:
+  //       "Flat no.04 Madhumalti Appartment, South Sadar Bazar, Solapur, MAHARASHTRA 413003",
+  //     default: false,
+  //   },
+  // ];
 
     return (
 
@@ -67,15 +71,34 @@ const AddressManagement = ({onClose }) => {
                   Default address
                 </p>
               )}
+              {addr.city && (
+                  <p className="text-sm text-gray-600">
+                    {addr.city}, {addr.pincode}
+                       </p>
+                   )}
+
+               {addr.default && (
+                  <p className="text-xs text-blue-600 font-medium mt-1">
+                   Default address
+                </p>
+               )}
             </div>
           ))}
         </div>
 
         {/* Footer */}
         <div className="mt-4 border-t pt-3">
-          <button className="text-blue-700 text-sm font-medium">
-            Add an address or pick-up point
+          <button
+          onClick={
+           ()=>{
+            onClose();
+            navigate("/newAddress")
+          }
+        }
+          className="text-blue-700 text-sm font-medium cursor-pointer">
+            Add an address
           </button>
+
 
           <div className="flex items-center mt-3 gap-2">
             <input

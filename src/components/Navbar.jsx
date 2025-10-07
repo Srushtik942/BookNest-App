@@ -5,10 +5,12 @@ import { FaMapLocation } from 'react-icons/fa6';
 import AddressManagement from '../pages/AddressManagement';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const userName = "Srushti"
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className=" top-0 left-0 w-full rounded-b-sm py-5 shadow-sm  z-50">
@@ -18,7 +20,7 @@ const Navbar = () => {
         <ul className="flex gap-8 text-black font-semibold text-xl">
           <li className='  cursor-pointer hover:text-amber-800'><Link to="/">Home</Link></li>
           <li className='  cursor-pointer hover:text-amber-800 '><Link to ="/products">Products</Link> </li>
-          <li className='  cursor-pointer hover:text-amber-800'><Link to="/wishlist">Wishlist</Link></li>
+          {/* <li className='  cursor-pointer hover:text-amber-800'><Link to="/wishlist">Wishlist</Link></li> */}
           {/* <li className='cursor-pointer hover:text-amber-800'><Link to="/cartPage">Cart</Link></li> */}
           <li className='cursor-pointer hover:text-amber-800'>
              <button
@@ -44,10 +46,12 @@ const Navbar = () => {
           />
 
           {/* WIshlist icon */}
-          <button className='relative'>
+          <button
+          onClick={()=>navigate("/wishlist")}
+          className='relative cursor-pointer'>
             <FaRegHeart size={25}className="text-gray-800 hover:text-amber-700"/>
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
-             2
+             4
             </span>
 
           </button>
