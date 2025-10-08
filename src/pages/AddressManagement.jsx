@@ -8,29 +8,6 @@ const AddressManagement = ({onClose }) => {
   const navigate  = useNavigate();
   const { addresses } = useAddress();
 
-  // const addresses = [
-  //   {
-  //     id: 1,
-  //     name: "Srushti Kulkarni",
-  //     address:
-  //       "D Block, Bhagayshree Nagar Society, Upper Indira Nagar, Pune, MAHARASHTRA 411037",
-  //     default: true,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Srushti Kulkarni",
-  //     address:
-  //       "Flat no.04 Madhumalti Appt. Lashkar, Solapur, MAHARASHTRA 413003",
-  //     default: false,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Srushti Satish Kulkarni",
-  //     address:
-  //       "Flat no.04 Madhumalti Appartment, South Sadar Bazar, Solapur, MAHARASHTRA 413003",
-  //     default: false,
-  //   },
-  // ];
 
     return (
 

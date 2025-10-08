@@ -37,7 +37,7 @@ const Address = () => {
       <p className='text-gray-600'>{addr.pincode}</p>
     </div>
 
-    {/* Bottom buttons */}
+    {/*  buttons */}
     <div className="flex gap-2 mt-2">
       <button
       onClick={() => navigate("/newAddress", { state: { ...addr } })}

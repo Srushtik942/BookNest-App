@@ -17,9 +17,14 @@ const ProfilePage = () => {
     email: "srushtikulkarni@gmail.com",
   });
 
-  const handleChange = (e) => {
-    setProfile({ ...profile, [e.target.name]: e.target.value });
-  };
+ const handleChange = (e) => {
+  const { name, value } = e.target;
+  setProfile(prev => ({
+    ...prev,
+    [name]: value,
+  }));
+};
+
 
   const toggleEdit = () => {
     setIsEditing(!isEditing);
