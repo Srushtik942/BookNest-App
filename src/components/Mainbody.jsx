@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Read from "../assets/read.png"
 import Girls from "../assets/girls.png"
 import { FiArrowDownRight , FiCheckCircle, FiLock, FiTruck } from 'react-icons/fi';
+import {FaRegHeart,FaStar } from "react-icons/fa"
 import AddressManagement from '../pages/AddressManagement';
 
 
-const Mainbody = () => {
+const Mainbody = ({isWished}) => {
 
 
    const features = [
@@ -32,6 +33,23 @@ const Mainbody = () => {
  { id: 3, title: "Book Three", author: "Author Three", img: Read },
  { id: 4, title: "Book Four", author: "Author Four", img: Read },
 ]
+
+const [addToCart, setAddToCart] = useState(true);
+  const [wishlist, setWishlist] = useState(true);
+
+
+
+const handleAddToCart = () =>{
+        setAddToCart(false);
+        alert("Book added to cart!")
+}
+
+const handleAddToWishlist = () =>{
+        setWishlist(false);
+        alert("Book added to wishlist!")
+}
+
+
 
  return (
 <div className='flex flex-col items-center px-5 gap-10 mb-1 w-full'>
@@ -116,33 +134,64 @@ const Mainbody = () => {
  <h2 className='text-gray-700  py-4 text-5xl playfair-heading text-center mb-7'>Our Popular Books</h2>
  <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-10 max-w-7xl mx-auto'>
         {books.map(book => (
-          <div key={book.id} className='bg-yellow-100 rounded-2xl shadow-lg flex flex-col items-center justify-center p-4'>
+          <div key={book.id} className='bg-yellow-100 rounded-2xl shadow-lg flex flex-col items-center justify-center p-4 hover:shadow-2xl cursor-pointer'>
             <img className='h-50 w-50 rounded-2xl mb-3' src={book.img} alt={book.title}/>
             <h4 className='text-gray-700 font-semibold'>{book.title}</h4>
             <p className='text-gray-700 text-sm mb-2'>by {book.author}</p>
-            <button className='text-white bg-amber-400 px-4 py-1 rounded-xl hover:bg-amber-500 cursor-pointer'>
-              Buy Now
-            </button>
-          </div>
+             <div className='flex flex-row gap-6 my-6'>
+                            <p className='text-gray-800'>₹ 1000</p>
+                            <p className='text-gray-800 flex items-center gap-1'>
+                              {book.rating}
+                              <FaStar className="text-yellow-500 text-base" />
+
+                            </p>
+
+                            <button
+                            onClick={handleAddToWishlist}
+                            className="text-red-900 text-2xl rounded-full cursor-pointer">
+                              {isWished ? <FaHeart /> : <FaRegHeart />}
+                            </button>
+                          </div>
+                          <button
+                          onClick={handleAddToCart}
+                          className='text-white bg-amber-800 px-4 py-1 text-lg  rounded-lg w-full hover:bg-amber-900 cursor-pointer'>
+                              Add to Cart
+              </button>
+
+         </div>
         ))}
       </div>
   </div>
+<hr className='text-gray-900 '/>
 
   {/* best selling books */}
     <div className='  w-full my-4'>
- <h2 className='text-gray-700  py-4 text-5xl playfair-heading text-center mb-7'>Our Best Selling Books</h2>
- <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-10 max-w-7xl mx-auto'>
+ <h2 className='text-gray-700  py-4 text-5xl playfair-heading text-center mb-7 '>Our Best Selling Books</h2>
+ <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-10 max-w-7xl mx-auto  '>
         {books.map(book => (
-          <div key={book.id} className=' rounded-2xl shadow-lg flex flex-col items-center justify-center p-4'>
+          <div key={book.id} className=' rounded-2xl shadow-lg flex flex-col items-center justify-center p-4 hover:shadow-2xl cursor-pointer'>
             <img className='h-50 w-50 rounded-2xl mb-3' src={book.img} alt={book.title}/>
             <h4 className='text-gray-700 font-semibold'>{book.title}</h4>
             <p className='text-gray-700 text-sm mb-2'>by {book.author}</p>
-            <div className='flex flex-row gap-6 my-6'>
-              <p className='text-gray-800'>₹ 1000</p>
-            <button className='text-white bg-amber-800 px-3 py-1 rounded-xl hover:bg-amber-900 cursor-pointer'>
-              Buy Now
-            </button>
-            </div>
+             <div className='flex flex-row gap-6 my-6'>
+                <p className='text-gray-800'>₹ 1000</p>
+                <p className='text-gray-800 flex items-center gap-1'>
+                  {book.rating}
+                  <FaStar className="text-yellow-500 text-base" />
+
+                </p>
+
+                <button
+                onClick={handleAddToWishlist}
+                className="text-red-900 text-2xl rounded-full cursor-pointer">
+                  {isWished ? <FaHeart /> : <FaRegHeart />}
+                </button>
+              </div>
+              <button
+              onClick={handleAddToCart}
+              className='text-white bg-amber-800 px-4 py-1 w-full rounded-lg text-lg hover:bg-amber-900 cursor-pointer'>
+                  Add to Cart
+                </button>
 
           </div>
         ))}

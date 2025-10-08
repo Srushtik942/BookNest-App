@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar"
 import Read from "../assets/read.png"
 import {FaHeart, FaRegHeart,  FaStar, FaRegStar, FaStarHalfAlt} from "react-icons/fa"
 import Sidebar from '../components/Sidebar'
-
+import { useState } from 'react'
 const ProductList = ({isWished}) => {
 
    const books = [
@@ -12,6 +12,22 @@ const ProductList = ({isWished}) => {
    { id: 3, title: "Book Three", author: "Author Three", img: Read, rating:5.1 },
    { id: 4, title: "Book Four", author: "Author Four", img: Read, rating:2.5 },
   ]
+
+  const [addToCart, setAddToCart] = useState(true);
+  const [wishlist, setWishlist] = useState(true);
+
+
+
+  const handleAddToCart = () =>{
+          setAddToCart(false);
+          alert("Book added to cart!")
+  }
+
+  const handleAddToWishlist = () =>{
+          setWishlist(false);
+          alert("Book added to wishlist!")
+  }
+
 
   return (
 
@@ -42,11 +58,15 @@ const ProductList = ({isWished}) => {
 
                 </p>
 
-                <button className="text-red-900 text-2xl rounded-full cursor-pointer">
+                <button
+                onClick={handleAddToWishlist}
+                className="text-red-900 text-2xl rounded-full cursor-pointer">
                   {isWished ? <FaHeart /> : <FaRegHeart />}
                 </button>
               </div>
-              <button className='text-white bg-amber-800 px-4 py-1  rounded-xl hover:bg-amber-900 cursor-pointer'>
+              <button
+              onClick={handleAddToCart}
+              className='text-white bg-amber-800 px-4 py-1  rounded-xl hover:bg-amber-900 cursor-pointer'>
                   Add to Cart
                 </button>
             </div>

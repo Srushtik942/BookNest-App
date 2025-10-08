@@ -1,5 +1,9 @@
 import React from 'react'
 
+const hanldeRemoveFilter = () =>{
+    
+}
+
 const Sidebar = () => {
     return (
         <div className='p-4'>
@@ -8,6 +12,7 @@ const Sidebar = () => {
                 Filters
             </h2>
               <button
+              onClick={hanldeRemoveFilter}
                     className='text-sm text-amber-700 hover:text-amber-900 font-semibold transition-colors duration-150 p-1 rounded-md cursor-pointer'
                     aria-label="Clear all applied filters"
                 >

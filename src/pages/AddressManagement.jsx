@@ -76,12 +76,6 @@ const AddressManagement = ({onClose }) => {
                     {addr.city}, {addr.pincode}
                        </p>
                    )}
-
-               {addr.default && (
-                  <p className="text-xs text-blue-600 font-medium mt-1">
-                   Default address
-                </p>
-               )}
             </div>
           ))}
         </div>
@@ -100,14 +94,15 @@ const AddressManagement = ({onClose }) => {
           </button>
 
 
-          <div className="flex items-center mt-3 gap-2">
-            <input
-              type="text"
-              placeholder="or enter an Indian pincode"
-              className="border border-black-300 rounded-md p-2 flex-grow text-sm"
-            />
-            <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm font-medium">
-              Apply
+          <div className="  mt-3 w-full">
+            <button
+            onClick={()=>{
+              onClose();
+              navigate("/cartPage")
+            }
+          }
+            className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 w-full py-2 rounded-md text-sm font-medium">
+              Checkout
             </button>
           </div>
         </div>

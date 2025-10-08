@@ -11,11 +11,15 @@ const WishlistPage = () => {
     { id: 3, title: "Book Three", author: "Author Three", img: Read, price: 599 },
     { id: 4, title: "Book Four", author: "Author Four", img: Read, price: 299 },
   ]);
+  const [wishlist, setWishlist] = useState(true);
   const RemoveProduct = (id) =>{
-
     const updateBooks = books.filter((book)=>book.id !== id);
     setBooks(updateBooks);
+  }
 
+  const handleToCart = ()=>{
+     setWishlist(false);
+     alert("Book added to the cart!")
   }
 
   return (
@@ -47,7 +51,9 @@ const WishlistPage = () => {
               <p className="text-black mb-3">by {book.author}</p>
               <p className="text-black font-semibold text-xl mb-3">₹{book.price}</p>
 
-              <button className="text-white bg-amber-800 px-4 py-1 rounded-lg w-full hover:bg-amber-900 cursor-pointer">
+              <button
+              onClick={handleToCart}
+              className="text-white bg-amber-800 px-4 py-1 rounded-lg w-full hover:bg-amber-900 cursor-pointer">
                 Move To Cart
               </button>
 
