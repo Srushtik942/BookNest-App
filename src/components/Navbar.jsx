@@ -1,11 +1,12 @@
 import React from 'react'
 import { FiShoppingCart } from "react-icons/fi";
-import {FaHeart, FaRegHeart} from "react-icons/fa"
+import {FaHeart, FaRegHeart,FaUserCircle } from "react-icons/fa"
 import { FaMapLocation } from 'react-icons/fa6';
 import AddressManagement from '../pages/AddressManagement';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 
 const Navbar = () => {
   const userName = "Srushti"
@@ -68,6 +69,14 @@ const Navbar = () => {
             </span>
           </button>
 
+          {/* profile */}
+
+  <div className="flex items-center cursor-pointer">
+
+          <Link to="/profile">
+          <FaUserCircle className="text-3xl text-gray-700 hover:text-black" /></Link>
+
+</div>
         </div>
       </nav>
       {/* modal */}

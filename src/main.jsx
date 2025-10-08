@@ -11,6 +11,7 @@ import CartPage from "./pages/CartPage.jsx"
 import AddressManagement from "./pages/AddressManagement.jsx"
 import Address from './components/Address.jsx'
 import NewAddress from "./components/NewAddress.jsx"
+import ProfilePage from "./pages/ProfilePage.jsx"
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path:"newAddress",
         element:<NewAddress/>
+      },
+      {
+        path:"profile",
+        element:<ProfilePage/>
       }
     ]
   }
