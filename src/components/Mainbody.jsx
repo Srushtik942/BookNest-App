@@ -4,6 +4,8 @@ import Girls from "../assets/girls.png"
 import { FiArrowDownRight , FiCheckCircle, FiLock, FiTruck } from 'react-icons/fi';
 import {FaRegHeart,FaStar } from "react-icons/fa"
 import AddressManagement from '../pages/AddressManagement';
+import { Navigate } from 'react-router-dom';
+import { Link } from "react-scroll";
 
 
 const Mainbody = ({isWished}) => {
@@ -77,7 +79,14 @@ const handleAddToWishlist = () =>{
               find anywhere else.
           </p>
         <div>
-            <button className='flex items-center gap-2 text-black rounded-2xl bg-amber-600 px-8 py-2'>Shop Now <FiArrowDownRight size={20} /> </button>
+          <button>
+            <Link
+              to="bestSellingBook"
+              smooth={true}
+              duration={600}
+           className='flex items-center gap-2 text-black rounded-2xl bg-amber-600 px-8 py-2 cursor-pointer'>Shop Now <FiArrowDownRight size={20} /> </Link>
+          </button>
+           
           </div>
         </div>
 
@@ -102,7 +111,8 @@ const handleAddToWishlist = () =>{
 
      <div className='w-full flex justify-center py-16'>
     {/* card container */}
-    <div className='bg-white shadow-xl rounded-2xl p-8 max-w-4xl w-full'>
+
+    <div className='bg-white shadow-xl rounded-2xl p-8 max-w-4xl w-full hover:shadow-2xl'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8 divide-x divide-gray-200'>
 
             {/*  Certified */}
@@ -165,7 +175,7 @@ const handleAddToWishlist = () =>{
 <hr className='text-gray-900 '/>
 
   {/* best selling books */}
-    <div className='  w-full my-4'>
+    <div id="bestSellingBook" className='  w-full my-4'>
  <h2 className='text-gray-700  py-4 text-5xl playfair-heading text-center mb-7 '>Our Best Selling Books</h2>
  <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-10 max-w-7xl mx-auto  '>
         {books.map(book => (

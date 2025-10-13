@@ -46,7 +46,7 @@ const ProductList = ({isWished}) => {
 
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-10 max-w-7xl mx-auto '>
           {books.map(book => (
-            <div key={book.id} className=' rounded-2xl shadow-lg flex flex-col items-center justify-center p-4 hover:bg-amber-300'>
+            <div key={book.id} className=' rounded-2xl shadow-lg flex flex-col items-center justify-center p-4 hover:bg-amber-300 hover:shadow-2xl'>
               <img className='h-50 w-50 rounded-2xl mb-3  ' src={Read} alt={book.title}/>
               <h4 className='text-gray-700 font-semibold'>{book.title}</h4>
               <p className='text-gray-700 text-sm mb-2'>by {book.author}</p>
