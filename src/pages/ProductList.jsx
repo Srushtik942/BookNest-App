@@ -1,17 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from "../components/Navbar"
 import Read from "../assets/read.png"
 import {FaHeart, FaRegHeart,  FaStar, FaRegStar, FaStarHalfAlt} from "react-icons/fa"
 import Sidebar from '../components/Sidebar'
 import { useState } from 'react'
+import { useParams } from 'react-router-dom'
 const ProductList = ({isWished}) => {
 
-   const books = [
-   { id: 1, title: "Book One", author: "Author One", img: Read, rating:4.5 },
-   { id: 2, title: "Book Two", author: "Author Two", img: Read, rating:3.5 },
-   { id: 3, title: "Book Three", author: "Author Three", img: Read, rating:5.1 },
-   { id: 4, title: "Book Four", author: "Author Four", img: Read, rating:2.5 },
-  ]
+   const { genre } = useParams();
+   console.log(genre);
+   const [books,setBooks] = useState([]);
+   const [loading, setLoading] = useState(true);
+
+   const baseUrl = import.meta.env.VITE_BASE_URL;
+
+
+  useEffect(()=>{
+    const filterByGenre = async()=>{
+      try{
+        const response = await fetch(`${baseUrl}/products/genre/${genre}`);
+        console.log(response);
+
+        const data = await  response.json();
+        console.log(data);
+
+       setBooks(data.filteredBooks || []);
+      }catch(error){
+        console.log()
+      }
+    }
+    filterByGenre();
+  },[]);
+
 
   const [addToCart, setAddToCart] = useState(true);
   const [wishlist, setWishlist] = useState(true);
@@ -42,16 +62,22 @@ const ProductList = ({isWished}) => {
       {/* best selling books */}
       <div className='w-3/4'>
 
-        <h2 className='text-gray-700 pb-4 text-3xl playfair-heading  text-center mb-10'>Showing All Books</h2>
+        <h2 className='text-gray-700 pb-4 text-3xl playfair-heading  text-center mb-10'>{genre ? `Showing All Books of ${genre}` : "No genre selected"}</h2>
+
+        { books.length === 0 ?(
+          <p className="text-center text-gray-600 text-xl">No books found for {genre || "this category"}  .</p>
+
+        ):(
 
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-10 max-w-7xl mx-auto '>
+
           {books.map(book => (
             <div key={book.id} className=' rounded-2xl shadow-lg flex flex-col items-center justify-center p-4 hover:bg-amber-300 hover:shadow-2xl'>
-              <img className='h-50 w-50 rounded-2xl mb-3  ' src={Read} alt={book.title}/>
+              <img className='h-50 w-50 rounded-2xl mb-3  ' src={book.imageUrl} alt={book.title}/>
               <h4 className='text-gray-700 font-semibold'>{book.title}</h4>
               <p className='text-gray-700 text-sm mb-2'>by {book.author}</p>
               <div className='flex flex-row gap-6 my-6'>
-                <p className='text-gray-800'>₹ 1000</p>
+                <p className='text-gray-800'>₹ {book.originalPrice}</p>
                 <p className='text-gray-800 flex items-center gap-1'>
                   {book.rating}
                   <FaStar className="text-yellow-500 text-base" />
@@ -72,6 +98,7 @@ const ProductList = ({isWished}) => {
             </div>
           ))}
         </div>
+        )}
       </div>
     </div>
   )

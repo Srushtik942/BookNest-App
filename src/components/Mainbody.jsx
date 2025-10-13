@@ -1,15 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import Read from "../assets/read.png"
 import Girls from "../assets/girls.png"
 import { FiArrowDownRight , FiCheckCircle, FiLock, FiTruck } from 'react-icons/fi';
 import {FaRegHeart,FaStar } from "react-icons/fa"
 import AddressManagement from '../pages/AddressManagement';
-import { Navigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { Link } from "react-scroll";
+
 
 
 const Mainbody = ({isWished}) => {
 
+  const [books,setBooks] = useState([]);
+  const[booksRate,setBooksRate] = useState([]);
+  const[genre,setGenre] = useState([]);
+  const [category,setCategory] = useState([]);
+  const [addToCart, setAddToCart] = useState(true);
+  const [wishlist, setWishlist] = useState(true);
+  const navigate = useNavigate();
 
    const features = [
     {
@@ -29,16 +37,45 @@ const Mainbody = ({isWished}) => {
  },
  ];
 
- const books = [
- { id: 1, title: "Book One", author: "Author One", img: Read },
- { id: 2, title: "Book Two", author: "Author Two", img: Read },
- { id: 3, title: "Book Three", author: "Author Three", img: Read },
- { id: 4, title: "Book Four", author: "Author Four", img: Read },
-]
+ const baseUrl = import.meta.env.VITE_BASE_URL;
 
-const [addToCart, setAddToCart] = useState(true);
-  const [wishlist, setWishlist] = useState(true);
+//  const books = [
+//  { id: 1, title: "Book One", author: "Author One", img: Read },
+//  { id: 2, title: "Book Two", author: "Author Two", img: Read },
+//  { id: 3, title: "Book Three", author: "Author Three", img: Read },
+//  { id: 4, title: "Book Four", author: "Author Four", img: Read },
+// ]
 
+useEffect(()=>{
+  const fetchData = async()=>{
+    try{
+      const response = await fetch(`${baseUrl}/books`);
+     console.log("response",response);
+      const data = await response.json();
+      setBooks(data.books || []);
+    }catch(error){
+      console.error(error);
+    }
+  }
+  fetchData();
+},[])
+
+useEffect(()=>{
+  const fetchBookData = async()=>{
+
+    try{
+        const response = await fetch(`${baseUrl}/books`);
+        console.log(response);
+      const data = await response.json();
+      const filteredBooks = (data.books || []).filter(book => book.rating > 4.7 && book.rating <= 4.9);
+      setBooksRate(filteredBooks)
+
+    }catch(error){
+      console.log(error);
+    }
+  }
+  fetchBookData();
+},[])
 
 
 const handleAddToCart = () =>{
@@ -51,13 +88,33 @@ const handleAddToWishlist = () =>{
         alert("Book added to wishlist!")
 }
 
+useEffect(()=>{
+const handleClick = async() =>{
+  try{
+    const response = await fetch(`/products/genre/${genre}`);
+    console.log(response);
+
+    const data = response.json();
+
+    setGenre(data);
+
+  }catch(error){
+    res.status(500).json({message:"Failed to fecth data", error})
+  }
+}
+handleClick();
+
+},[]);
 
 
  return (
 <div className='flex flex-col items-center px-5 gap-10 mb-1 w-full'>
  <div className='flex flex-wrap justify-center gap-5 mb-5'>
  {["Fiction", "Non-Fiction", "Sci-Fi", "Comics", "Thriller"].map(cat => (
- <div key={cat} className='py-2 rounded-xl bg-yellow-800 text-xl p-5 w-fit cursor-pointer hover:bg-amber-900'>
+ <div
+  key={cat}
+  onClick={() => navigate(`/products/${cat}`)}
+  className='py-2 rounded-xl bg-yellow-800 text-xl p-5 w-fit cursor-pointer hover:bg-amber-900'>
  <h1>{cat}</h1>
 </div>
 ))}
@@ -145,11 +202,11 @@ const handleAddToWishlist = () =>{
  <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-10 max-w-7xl mx-auto'>
         {books.map(book => (
           <div key={book.id} className='bg-yellow-100 rounded-2xl shadow-lg flex flex-col items-center justify-center p-4 hover:shadow-2xl cursor-pointer'>
-            <img className='h-50 w-50 rounded-2xl mb-3' src={book.img} alt={book.title}/>
+            <img className='h-50 w-50 rounded-2xl mb-3' src={book.imageUrl} alt={book.title}/>
             <h4 className='text-gray-700 font-semibold'>{book.title}</h4>
             <p className='text-gray-700 text-sm mb-2'>by {book.author}</p>
              <div className='flex flex-row gap-6 my-6'>
-                            <p className='text-gray-800'>₹ 1000</p>
+                            <p className='text-gray-800'>₹ {book.originalPrice}</p>
                             <p className='text-gray-800 flex items-center gap-1'>
                               {book.rating}
                               <FaStar className="text-yellow-500 text-base" />
@@ -178,13 +235,13 @@ const handleAddToWishlist = () =>{
     <div id="bestSellingBook" className='  w-full my-4'>
  <h2 className='text-gray-700  py-4 text-5xl playfair-heading text-center mb-7 '>Our Best Selling Books</h2>
  <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-10 max-w-7xl mx-auto  '>
-        {books.map(book => (
+        {booksRate.map(book => (
           <div key={book.id} className=' rounded-2xl shadow-lg flex flex-col items-center justify-center p-4 hover:shadow-2xl cursor-pointer'>
-            <img className='h-50 w-50 rounded-2xl mb-3' src={book.img} alt={book.title}/>
+            <img className='h-50 w-50 rounded-2xl mb-3' src={book.imageUrl} alt={book.title}/>
             <h4 className='text-gray-700 font-semibold'>{book.title}</h4>
             <p className='text-gray-700 text-sm mb-2'>by {book.author}</p>
              <div className='flex flex-row gap-6 my-6'>
-                <p className='text-gray-800'>₹ 1000</p>
+                <p className='text-gray-800'>₹ {book.originalPrice}</p>
                 <p className='text-gray-800 flex items-center gap-1'>
                   {book.rating}
                   <FaStar className="text-yellow-500 text-base" />
