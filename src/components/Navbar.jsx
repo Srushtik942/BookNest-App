@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FiShoppingCart } from "react-icons/fi";
 import {FaHeart, FaRegHeart,FaUserCircle } from "react-icons/fa"
 import { FaMapLocation } from 'react-icons/fa6';
@@ -11,7 +11,30 @@ import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
   const userName = "Srushti"
   const [showModal, setShowModal] = useState(false);
+  const [wishlistCount, setWishlistCount]= useState(0);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    const loadWishlistCOunt = () =>{
+    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    setWishlistCount(wishlist.length);
+    }
+    loadWishlistCOunt();
+
+    // const handleStorageChange = () => {
+    //   const updatedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    //   setWishlistCount(updatedWishlist.length);
+    // };
+
+      window.addEventListener("wishlistUpdated", loadWishlistCOunt);
+      window.addEventListener("storage", loadWishlistCOunt);
+
+    return () => {
+      window.removeEventListener("storage", loadWishlistCOunt);
+       window.removeEventListener("storage", loadWishlistCOunt);
+    };
+
+  },[]);
 
   return (
     <div className=" top-0 left-0 w-full rounded-b-sm py-5 shadow-sm  z-50">
@@ -52,7 +75,7 @@ const Navbar = () => {
           className='relative cursor-pointer'>
             <FaRegHeart size={25}className="text-gray-800 hover:text-amber-700"/>
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
-             4
+             {wishlistCount}
             </span>
 
           </button>

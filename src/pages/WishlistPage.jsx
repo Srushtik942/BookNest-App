@@ -1,17 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Read from "../assets/read.png";
 import { FaHeart  } from "react-icons/fa"
 import { useState } from "react";
 
 
 const WishlistPage = () => {
-   const [books, setBooks] = useState([
-    { id: 1, title: "Book One", author: "Author One", img: Read, price: 1099 },
-    { id: 2, title: "Book Two", author: "Author Two", img: Read, price: 899 },
-    { id: 3, title: "Book Three", author: "Author Three", img: Read, price: 599 },
-    { id: 4, title: "Book Four", author: "Author Four", img: Read, price: 299 },
-  ]);
+   const [books, setBooks] = useState([]);
   const [wishlist, setWishlist] = useState(true);
+   const baseUrl = import.meta.env.VITE_BASE_URL;
+
   const RemoveProduct = (id) =>{
     const updateBooks = books.filter((book)=>book.id !== id);
     setBooks(updateBooks);
@@ -21,6 +18,23 @@ const WishlistPage = () => {
      setWishlist(false);
      alert("Book added to the cart!")
   }
+
+useEffect(() => {
+  const fetchWishlist = () => {
+    try {
+      // Get wishlist array from localStorage
+      const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+      // Set it directly into state
+      setBooks(storedWishlist);
+    } catch (error) {
+      console.error("Error fetching wishlist from localStorage:", error);
+    }
+  };
+
+  fetchWishlist();
+}, []);
+
 
   return (
     <div className="py-10  min-h-screen flex justify-center">
@@ -41,7 +55,7 @@ const WishlistPage = () => {
                 <FaHeart  size={25} />
               </button>
               <img
-                src={book.img}
+                src={book.imageUrl}
                 alt={book.title}
                 className="h-50 w-50 object-cover rounded-md mb-3"
               />
@@ -49,7 +63,7 @@ const WishlistPage = () => {
                 {book.title}
               </h3>
               <p className="text-black mb-3">by {book.author}</p>
-              <p className="text-black font-semibold text-xl mb-3">₹{book.price}</p>
+              <p className="text-black font-semibold text-xl mb-3">₹{book.originalPrice}</p>
 
               <button
               onClick={handleToCart}
