@@ -12,6 +12,7 @@ import AddressManagement from "./pages/AddressManagement.jsx"
 import Address from './components/Address.jsx'
 import NewAddress from "./components/NewAddress.jsx"
 import ProfilePage from "./pages/ProfilePage.jsx"
+import AllProducts from "./pages/AllProducts.jsx"
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
        path : "products",
        element: <ProductList/>
+      },
+      {
+        path:"allProducts",
+        element:<AllProducts/>
       },
       {
         path: "products/:genre",

@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
   return (
 
-   <div className='text-center py-5 bg-amber-600'>
+   <div className='text-center py-5 mt-5 bg-amber-600'>
     <p>  &copy; 2025 KitabKart.com.  All rights reserved. Made with ❤️ by Srushti!</p>
    </div>
   )

@@ -12,7 +12,10 @@ const Navbar = () => {
   const userName = "Srushti"
   const [showModal, setShowModal] = useState(false);
   const [wishlistCount, setWishlistCount]= useState(0);
+  const [product,setProduct] = useState([]);
   const navigate = useNavigate();
+    const baseUrl = import.meta.env.VITE_BASE_URL;
+
 
   useEffect(()=>{
     const loadWishlistCOunt = () =>{
@@ -36,6 +39,8 @@ const Navbar = () => {
 
   },[]);
 
+
+
   return (
     <div className=" top-0 left-0 w-full rounded-b-sm py-5 shadow-sm  z-50">
       <nav className="flex items-center justify-between mx-5">
@@ -43,9 +48,9 @@ const Navbar = () => {
         {/* Menu items */}
         <ul className="flex gap-8 text-black font-semibold text-xl">
           <li className='  cursor-pointer hover:text-amber-800'><Link to="/">Home</Link></li>
-          <li className='  cursor-pointer hover:text-amber-800 '><Link to ="/products">Products</Link> </li>
-          {/* <li className='  cursor-pointer hover:text-amber-800'><Link to="/wishlist">Wishlist</Link></li> */}
-          {/* <li className='cursor-pointer hover:text-amber-800'><Link to="/cartPage">Cart</Link></li> */}
+          <li className='  cursor-pointer hover:text-amber-800 '
+          // onClick={handleClickProduct}
+          ><Link to ="/allProducts">Products</Link> </li>
           <li className='cursor-pointer hover:text-amber-800'>
              <button
               className="flex items-center gap-2 cursor-pointer hover:text-amber-800"
