@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   FaUserCircle,
 
@@ -7,6 +7,7 @@ import {
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("personal");
   const [isEditing, setIsEditing] = useState(false);
+  const[orders, setOrders] = useState([]);
 
   const [profile, setProfile] = useState({
     name: "Srushti Kulkarni",
@@ -35,6 +36,59 @@ const ProfilePage = () => {
     setIsEditing(false);
     alert(" Profile updated successfully!");
   };
+
+  //fetching data from localstorage
+const loadOrderFromLocalStorage = () => {
+  try {
+    const data = localStorage.getItem("cart");
+    if (!data) {
+      setOrders([]);
+      return;
+    }
+
+    const jsonData = JSON.parse(data);
+
+    if (Array.isArray(jsonData)) {
+
+      const orders= jsonData.map(item => ({
+        ...item,
+        quantity: 1,
+        price: item.originalPrice || 0,
+        purchasedAt: new Date().toISOString()
+      }));
+
+      setOrders(orders);
+    } else {
+      setOrders([]);
+    }
+  } catch (error) {
+    console.log("Failed to load orders from localStorage:", error);
+    setOrders([]);
+  }
+};
+
+useEffect(() => {
+  loadOrderFromLocalStorage();
+}, []);
+
+
+const formatDate = (iso) => {
+  try {
+    return new Date(iso).toLocaleDateString("en-IN", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  } catch {
+    return iso;
+  }
+};
+
+const orderTotal = (order) => {
+  return (order.price || 0) * (order.quantity || 1);
+};
+
+const grandTotal = orders.reduce((sum, o) => sum + orderTotal(o), 0);
 
   return (
     <div className="flex min-h-screen bg-gray-50">
@@ -227,15 +281,45 @@ const ProfilePage = () => {
         )}
 
         {activeTab === "orders" && (
-          <section>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">
-              Order History
-            </h2>
-            <p className="text-gray-500 mb-6">
-              Your recent purchases will appear here.
-            </p>
-            <div className="bg-white p-6 rounded-xl border shadow-sm text-gray-600">
-              No orders yet.
+           <section>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">Order History</h2>
+            <p className="text-gray-500 mb-6">Your recent purchases will appear here.</p>
+
+            <div className="space-y-4">
+              {orders.length === 0 ? (
+                <div className="bg-white p-6 rounded-xl border shadow-sm text-gray-600">No orders yet.</div>
+              ) : (
+                <>
+                  <div className="bg-white p-6 rounded-xl border shadow-sm text-gray-600">
+                    <div className="grid grid-cols-12 gap-4 items-center">
+                      <div className="col-span-8 font-medium">Item</div>
+                      <div className="col-span-1 text-right font-medium">Qty</div>
+                      <div className="col-span-2 text-right font-medium">Price</div>
+                      <div className="col-span-1 text-right font-medium">Total</div>
+                    </div>
+                  </div>
+
+                  {orders.map((o) => (
+                    <div key={o.id} className="bg-white p-4 rounded-xl border shadow-sm text-gray-700">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <div className="font-semibold">{o.title}</div>
+                          <div className="text-sm text-gray-500">Purchased: {formatDate(o.purchasedAt)}</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-sm">Qty: {o.quantity}</div>
+                          <div className="text-sm">₹{o.price.toFixed(2)}</div>
+                          <div className="font-semibold">₹{orderTotal(o).toFixed(2)}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+
+                  <div className="bg-white p-4 rounded-xl border shadow-sm text-gray-800 text-right font-semibold">
+                    Grand total: ₹{grandTotal.toFixed(2)}
+                  </div>
+                </>
+              )}
             </div>
           </section>
         )}

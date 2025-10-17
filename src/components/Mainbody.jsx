@@ -12,8 +12,13 @@ const Mainbody = () => {
   const [booksRate, setBooksRate] = useState([]);
   const [genre, setGenre] = useState([]);
   const [category, setCategory] = useState([]);
-  const [addToCart, setAddToCart] = useState(true);
+  // const [addToCart, setAddToCart] = useState(true);
   const [wishlist, setWishlist] = useState([]); // Store wishlist items
+  const[addToCart,setAddToCart] = useState([]); //add to cart
+  const [saveBookToLocalStorage,setSaveBookToLocalStorage] = useState([]);
+
+
+
   const navigate = useNavigate();
 
   const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -36,6 +41,20 @@ const Mainbody = () => {
   const isInWishlist = (bookId) => {
     return wishlist.some(item => item._id === bookId);
   };
+
+  // get cart from localstoreage
+
+  const getCartItemFromLocalStorage = () =>{
+    const cart = localStorage.getItem('cart');
+    return cart ? JSON.parse(cart): [];
+  }
+
+  // save book to localStorage
+  const isInLocalStorage = (cart) =>{
+     localStorage.setItem('cart',JSON.stringify(cart));
+
+     window.dispatchEvent(new Event("cartUpdated"));
+  }
 
   // Load wishlist on component mount
   useEffect(() => {
@@ -73,33 +92,59 @@ const Mainbody = () => {
     fetchBookData();
   }, [])
 
-  // ============ HANDLERS ============
+// Handlers
 
-  const handleAddToCart = () => {
-    setAddToCart(false);
-    alert("Book added to cart!")
+
+const handleAddToCart = (book) => {
+  try {
+    const existingCart = getCartItemFromLocalStorage();
+
+    if (existingCart.some(item => item._id === book._id)) {
+      alert("Book already in cart!");
+      return;
+    }
+
+    const cleanBook = {
+      _id: book._id,
+      title: book.title,
+      author: book.author,
+      imageUrl: book.imageUrl,
+      originalPrice: book.originalPrice,
+      rating: book.rating,
+      views : book.views,
+      discount: book.disocunt
+    };
+
+    const updatedCart = [...existingCart, cleanBook];
+    setAddToCart(updatedCart);
+    isInLocalStorage(updatedCart);
+    alert("Book added to cart!");
+  } catch (error) {
+    console.log("Error adding to cart", error);
   }
+};
 
-  // UPDATED: Handle Add/Remove from Wishlist
+
+
   const handleAddToWishlist = (book) => {
     try {
-      // Check if already in wishlist
+
       if (isInWishlist(book._id)) {
         // Remove from wishlist
         const updatedWishlist = wishlist.filter(item => item._id !== book._id);
         setWishlist(updatedWishlist);
         saveWishlistToLocalStorage(updatedWishlist);
-        alert("🗑️ Book removed from wishlist!");
+        alert(" Book removed from wishlist!");
       } else {
         // Add to wishlist
         const updatedWishlist = [...wishlist, book];
         setWishlist(updatedWishlist);
         saveWishlistToLocalStorage(updatedWishlist);
-        alert("✅ Book added to wishlist!");
+        alert(" Book added to wishlist!");
       }
     } catch (error) {
       console.error("Error managing wishlist:", error);
-      alert("❌ Error updating wishlist");
+      alert(" Error updating wishlist");
     }
   };
 
@@ -198,7 +243,7 @@ const Mainbody = () => {
                   </button>
                 </div>
                 <button
-                  onClick={handleAddToCart}
+                onClick={() => handleAddToCart(book)}
                   className='text-white bg-amber-800 px-4 py-1 text-lg rounded-lg w-full hover:bg-amber-900 cursor-pointer'>
                   Add to Cart
                 </button>
@@ -231,7 +276,7 @@ const Mainbody = () => {
                   </button>
                 </div>
                 <button
-                  onClick={handleAddToCart}
+                onClick={() => handleAddToCart(book)}
                   className='text-white bg-amber-800 px-4 py-1 w-full rounded-lg text-lg hover:bg-amber-900 cursor-pointer'>
                   Add to Cart
                 </button>

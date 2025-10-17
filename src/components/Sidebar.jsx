@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Sidebar = ({ setFilteredBooks }) => {
   const [selectedGenres, setSelectedGenres] = useState([]);
-  const[selectedRating,setSelectedRating] = useState(4);
+  const[selectedRating,setSelectedRating] = useState(0);
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const handleCategoryChange = async (event) => {
