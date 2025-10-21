@@ -13,8 +13,11 @@ const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [wishlistCount, setWishlistCount]= useState(0);
   const [product,setProduct] = useState([]);
+  const [cartCount,setCartCount] = useState(0);
   const navigate = useNavigate();
-    const baseUrl = import.meta.env.VITE_BASE_URL;
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+
+
 
 
   useEffect(()=>{
@@ -24,19 +27,29 @@ const Navbar = () => {
     }
     loadWishlistCOunt();
 
-    // const handleStorageChange = () => {
-    //   const updatedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    //   setWishlistCount(updatedWishlist.length);
-    // };
 
       window.addEventListener("wishlistUpdated", loadWishlistCOunt);
       window.addEventListener("storage", loadWishlistCOunt);
 
     return () => {
       window.removeEventListener("storage", loadWishlistCOunt);
-       window.removeEventListener("storage", loadWishlistCOunt);
-    };
+        };
 
+  },[]);
+
+  useEffect(()=>{
+    const loadCartCount = () =>{
+      const itemCart = JSON.parse(localStorage.getItem("cart")) || [];
+      setCartCount(itemCart.length);
+    }
+   loadCartCount();
+
+   window.addEventListener("DOMContentLoadedcartUpdated",loadCartCount);
+   window.addEventListener("storage",loadCartCount);
+
+   return()=>{
+    window.removeEventListener("storage",loadCartCount);
+   }
   },[]);
 
 
@@ -93,7 +106,7 @@ const Navbar = () => {
 
             {/* Badge for cart count */}
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
-              3
+              {cartCount}
             </span>
           </button>
 

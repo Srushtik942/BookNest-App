@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const Sidebar = ({ setFilteredBooks }) => {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const[selectedRating,setSelectedRating] = useState(0);
+  const [selectedSort,setSelectedSort] = useState("");
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const handleCategoryChange = async (event) => {
@@ -70,6 +71,34 @@ const Sidebar = ({ setFilteredBooks }) => {
         console.error("Error fetching book by rating", error);
     }
   }
+
+  // price sort handler
+
+ const handlePriceSort = async (event) => {
+  const sortValue = event.target.value;
+  setSelectedSort(sortValue);
+
+  try {
+
+    let url = `${baseUrl}/products/sort/sort?sort=${sortValue}`;
+
+    if (selectedGenres.length > 0) {
+      url += `&genre=${selectedGenres[0]}`;
+    }
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (res.ok) {
+      setFilteredBooks(data.books);
+    } else {
+      console.warn(data.message);
+      setFilteredBooks([]);
+    }
+  } catch (error) {
+    console.error("Error sorting books by price", error);
+  }
+};
 
 
   const handleRemoveFilter = async () => {
@@ -164,10 +193,21 @@ const Sidebar = ({ setFilteredBooks }) => {
       {/* Sort by Price */}
       <div className='text-gray-800 my-10'>
         <h2 className='my-2 text-xl font-bold'>Price</h2>
-        <input type="radio" id="priceId" name="priceSort" />
+        <input type="radio" id="priceLowHigh" name="priceSort"
+         value='asc'
+        //  checked={selectedSort === "asc"}
+         onChange={handlePriceSort}
+        className='text-amber-600 focus:ring-amber-500'
+        />
+
         <label>Price - Low to High</label>
         <br />
-        <input type='radio' id="highPriceId" name="priceSort" />
+        <input type='radio' id="priceHighLow" name="priceSort"
+        value='desc'
+        // checked={selectedSort === 'desc'}
+        onChange={handlePriceSort}
+        className='text-amber-600 focus:ring-amber-500'
+        />
         <label>Price - High to Low</label>
       </div>
     </div>
