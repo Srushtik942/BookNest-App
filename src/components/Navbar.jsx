@@ -14,6 +14,8 @@ const Navbar = () => {
   const [wishlistCount, setWishlistCount]= useState(0);
   const [product,setProduct] = useState([]);
   const [cartCount,setCartCount] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -52,6 +54,22 @@ const Navbar = () => {
    }
   },[]);
 
+  useEffect(()=>{
+     if (!searchQuery) return;
+    const findBooks = async () =>{
+      try {
+      const response = await fetch(`${baseUrl}/books/search/${encodeURIComponent(searchQuery)}`);
+      if (!response.ok) throw new Error("Failed to fetch books");
+      const data = await response.json();
+      setSearchResults(data); // save results to state
+    } catch (error) {
+      console.error("Error fetching books:", error);
+    }
+
+    }
+    findBooks();
+  },[searchQuery])
+
 
 
   return (
@@ -79,13 +97,29 @@ const Navbar = () => {
         <h3 className='playfair-heading  text-gray-800 text-4xl font-stretch-110%  font-semibold '> KitabKart.com</h3>
 
         {/* Search  */}
-        <div className='flex items-center gap-4'>
+        <div className='flex items-center gap-4 relative'>
           <input
             id="search"
             type='text'
             placeholder="Search books..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className='w-40 sm:w-auto border border-gray-300 text-black rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-amber-400'
           />
+
+           {searchResults.length > 0 && (
+    <div className="absolute mt-2 w-64 max-h-60 overflow-y-auto bg-white border border-gray-300 rounded shadow-lg z-50">
+      {searchResults.map((book) => (
+        <Link
+          to={`/book/${book._id}`}
+          key={book._id}
+          className="block px-3 py-2 hover:bg-amber-100 text-gray-800"
+        >
+          {book.title}
+        </Link>
+      ))}
+    </div>
+  )}
 
           {/* WIshlist icon */}
           <button

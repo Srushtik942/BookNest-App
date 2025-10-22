@@ -52,19 +52,27 @@ const Sidebar = ({ setFilteredBooks }) => {
 
 
   const handleRatingChange = async(event) =>{
-    const rating = event.target.value;
+    const rating = Number(event.target.value);
 
     setSelectedRating(rating);
 
     try{
          const res = await fetch(`${baseUrl}/products/rating/${rating}`);
+         console.log(res);
          const data = await res.json();
+        console.log(data);
 
     if (res.ok) {
-      setFilteredBooks(data.filteredBooks);
+         if(data.bookData && data.bookData.length > 0){
+           setFilteredBooks(data.bookData);
+         }else{
+           setFilteredBooks([]);
+          alert(`No books found with rating ${rating} `);
+         }
     } else {
       setFilteredBooks([]);
       console.warn(data.message);
+
     }
 
     }catch(error){
@@ -177,10 +185,9 @@ const Sidebar = ({ setFilteredBooks }) => {
             name='rating'
             min='1'
             max='5'
-            step='1'
+            step='0.1'
             value={selectedRating}
             onChange={handleRatingChange}
-            // defaultValue='4'
             className='w-full h-2 bg-amber-200 rounded-lg appearance-none cursor-pointer range-lg accent-amber-600'
           />
           <div className='w-full flex justify-between text-sm text-gray-600 mt-2'>
@@ -195,7 +202,6 @@ const Sidebar = ({ setFilteredBooks }) => {
         <h2 className='my-2 text-xl font-bold'>Price</h2>
         <input type="radio" id="priceLowHigh" name="priceSort"
          value='asc'
-        //  checked={selectedSort === "asc"}
          onChange={handlePriceSort}
         className='text-amber-600 focus:ring-amber-500'
         />
