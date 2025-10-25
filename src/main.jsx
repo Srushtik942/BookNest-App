@@ -13,6 +13,7 @@ import Address from './components/Address.jsx'
 import NewAddress from "./components/NewAddress.jsx"
 import ProfilePage from "./pages/ProfilePage.jsx"
 import AllProducts from "./pages/AllProducts.jsx"
+import SearchResults from "./pages/SearchResults.jsx"
 
 const router = createBrowserRouter([
   {
@@ -62,7 +63,10 @@ const router = createBrowserRouter([
       {
         path:"profile",
         element:<ProfilePage/>
-      }
+      },
+      {
+         path: "books/search/:bookName", element: <SearchResults />
+      },
     ]
   }
 ])

@@ -5,6 +5,7 @@ import Footer from "./components/footer"
 import ProductList from "./pages/ProductList"
 import { Outlet } from 'react-router-dom'
 import {AddressProvider} from "./context/AddressContext"
+
 function App() {
 
   return (
