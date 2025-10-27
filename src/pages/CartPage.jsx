@@ -37,7 +37,7 @@ const CartPage = () => {
     alert("Book moved to wishlist!");
   };
 
-  // ✅ Fetch cart data from localStorage
+  // Fetch cart data from localStorage
   useEffect(() => {
     try {
       const storedCartItems = JSON.parse(localStorage.getItem("cart")) || [];

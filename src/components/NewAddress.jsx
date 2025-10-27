@@ -13,6 +13,20 @@ const NewAddress = () => {
   const handleSubmit = (e)=>{
     e.preventDefault();
 
+
+    //  validation for address form
+    if(!name || !city || !address || !pincode){
+      alert("Please fill in all fields before submitting!");
+      return;
+    }
+
+    // validation for number
+    if (pincode.length !== 6 || isNaN(pincode)) {
+       alert("Please enter a valid 6-digit numeric pincode!");
+       return;
+    }
+
+
     addAddress({name,city,address,pincode});
     navigate("/addAddress")
   }

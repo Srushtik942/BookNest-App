@@ -58,14 +58,6 @@ const SearchResults = () => {
                 key={book._id}
                 className="relative rounded-xl shadow-md p-3 text-center bg-amber-100 text-black hover:shadow-lg transition-all duration-200"
               >
-                {/* ❤️ Wishlist Button - top right corner */}
-                {/* <button
-                  onClick={() => handleAddToWishlist(book._id)}
-                  className="absolute top-2 right-2 text-amber-900 text-2xl hover:scale-110 transition-transform duration-200"
-                >
-                  {wishlist[book._id] ? <FaHeart /> : <FaRegHeart />}
-                </button> */}
-
                 <img
                   src={book.imageUrl || ""}
                   alt={book.title}

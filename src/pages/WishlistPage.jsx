@@ -23,7 +23,6 @@ const WishlistPage = () => {
       const storedWishlist = JSON.parse(localStorage.getItem("wishlist"));
 
       if (storedWishlist) {
-        // Convert object with numeric keys into array + remove non-object values
         const wishlistArray = Array.isArray(storedWishlist)
           ? storedWishlist
           : Object.values(storedWishlist).filter(

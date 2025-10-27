@@ -28,7 +28,7 @@ const ProductList = ({ isWished }) => {
     }
   };
 
-  // ✅ Save data to localStorage
+  //  Save data to localStorage
   const saveToLocalStorage = (key, data) => {
     try {
       localStorage.setItem(key, JSON.stringify(data));
@@ -132,7 +132,7 @@ const ProductList = ({ isWished }) => {
 
         {loading ? (
           <p className="text-center text-gray-600 text-lg sm:text-xl mt-10">
-            Fetching books for {genre}... 📚
+            Fetching books for {genre}...
           </p>
         ) : books.length === 0 ? (
           <p className="text-center text-gray-600 text-lg sm:text-xl mt-10">
@@ -165,7 +165,7 @@ const ProductList = ({ isWished }) => {
                     <FaStar className="text-yellow-500 text-xs sm:text-base" />
                   </p>
 
-                  {/* ❤️ Wishlist */}
+                  {/* Wishlist */}
                   <button
                     onClick={() => handleAddToWishlist(book)}
                     className="text-red-900 text-xl sm:text-2xl rounded-full cursor-pointer hover:scale-110 transition-transform"
@@ -174,12 +174,12 @@ const ProductList = ({ isWished }) => {
                   </button>
                 </div>
 
-                {/* 🛒 Add to Cart */}
+                {/*  Add to Cart */}
                 <button
                   onClick={() => handleAddToCart(book)}
                   className="text-white bg-amber-800 px-3 py-1 text-sm sm:text-base rounded-lg w-full hover:bg-amber-900 cursor-pointer"
                 >
-                  {isInCart(book._id) ? "In Cart 🛒" : "Add to Cart"}
+                  {isInCart(book._id) ? "In Cart " : "Add to Cart"}
                 </button>
               </div>
             ))}

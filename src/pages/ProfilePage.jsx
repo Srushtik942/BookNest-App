@@ -53,7 +53,6 @@ const loadOrderFromLocalStorage = () => {
     if (Array.isArray(jsonData)) {
 
       const orders= jsonData.map(item => ({
-        // Using a simple unique ID for demonstration, assuming _id or id exists
         id: item._id || Math.random(),
         ...item,
         quantity: 1,
@@ -73,9 +72,9 @@ const loadOrderFromLocalStorage = () => {
 
 useEffect(() => {
   loadOrderFromLocalStorage();
-  // Listener to close sidebar when medium screen size is reached (desktop view)
+//  (desktop view)
   const handleResize = () => {
-    if (window.innerWidth >= 768) { // Tailwind's 'md' breakpoint
+    if (window.innerWidth >= 768) {
       setIsSidebarOpen(false);
     }
   };
