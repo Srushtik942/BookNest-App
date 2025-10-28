@@ -83,9 +83,9 @@ const ProductList = () => {
 
       {/* Main Content */}
       <div className="w-full md:w-3/4">
-        <h2 className="text-gray-700 pb-4 text-2xl sm:text-3xl text-center mb-6">
+        {/* <h2 className="text-gray-700 pb-4 text-2xl sm:text-3xl text-center mb-6">
           {genre ? `Books in ${genre}` : "Showing All Books"}
-        </h2>
+        </h2> */}
 
         {loading ? (
           <p className="text-center text-gray-500">Loading books...</p>

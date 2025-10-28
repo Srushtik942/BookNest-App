@@ -7,7 +7,7 @@ import AddressManagement from "../pages/AddressManagement";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const userName = "Srushti";
+  const userName = "User";
   const [showModal, setShowModal] = useState(false);
   const [wishlistCount, setWishlistCount] = useState(0);
   const [cartCount, setCartCount] = useState(0);
@@ -100,6 +100,18 @@ const Navbar = () => {
             onKeyDown={handleSearchKeyDown}
             className="hidden sm:block w-40 md:w-52 border border-gray-300 text-black rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-amber-400"
           />
+
+            {searchQuery && (
+    <button
+      onClick={() => {
+        setSearchQuery("");
+        navigate("/"); 
+      }}
+      className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black text-lg"
+    >
+      ×
+    </button>
+  )}
 
           {/* Wishlist */}
           <button

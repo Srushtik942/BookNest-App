@@ -127,9 +127,9 @@ const ProductList = ({ isWished }) => {
 
       {/* Main Content */}
       <div className="w-full md:w-3/4 p-4 sm:p-6 lg:p-10">
-        <h2 className="text-gray-700 pb-4 text-2xl sm:text-3xl playfair-heading text-center mt-12 md:mt-0 mb-6 sm:mb-10">
+        {/* <h2 className="text-gray-700 pb-4 text-2xl sm:text-3xl playfair-heading text-center mt-12 md:mt-0 mb-6 sm:mb-10">
           {genre ? `Books in ${genre}` : "All Books"}
-        </h2>
+        </h2> */}
 
         {loading ? (
           <p className="text-center text-gray-600 text-lg sm:text-xl mt-10">
