@@ -1,27 +1,32 @@
-import './App.css'
-import Navbar from "./components/Navbar"
-import Mainbody from "./components/Mainbody"
-import Footer from "./components/footer"
-import ProductList from "./pages/ProductList"
-import { Outlet } from 'react-router-dom'
-import {AddressProvider} from "./context/AddressContext"
+import "./App.css";
+import Navbar from "./components/Navbar";
+import Footer from "./components/footer";
+import { Outlet } from "react-router-dom";
+import { AddressProvider } from "./context/AddressContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-
   return (
     <>
-    <AddressProvider>
-      <Navbar/>
- <div className='pt-13'>
-    <Outlet />
+      <AddressProvider>
+        <Navbar />
+        <div className="pt-13">
+          <Outlet />
+        </div>
+        <Footer />
 
-  </div>
-  {/* <ProductList/> */}
-  <Footer/>
-    </AddressProvider>
-
+        {/* ✅ Single global Toast container */}
+        {/* <ToastContainer
+          position="bottom-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          closeOnClick
+          pauseOnHover
+        /> */}
+      </AddressProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -301,8 +301,8 @@ const Mainbody = () => {
       hideProgressBar={false}
       newestOnTop={false}
       closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
+      rtl={false} 
+       pauseOnFocusLoss
       draggable
       pauseOnHover
       theme="light"

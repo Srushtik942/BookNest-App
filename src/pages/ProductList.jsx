@@ -188,7 +188,7 @@ const ProductList = ({ isWished }) => {
         )}
       </div>
       <ToastContainer
-      position='bottom-right'
+      // position='bottom-right'
       autoClose={2000}
       hideProgressBar={false}
       closeOnClick

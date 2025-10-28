@@ -139,7 +139,7 @@ const ProductList = () => {
         )}
       </div>
 
-      <ToastContainer position="bottom-right" />
+      <ToastContainer  />
     </div>
   );
 };

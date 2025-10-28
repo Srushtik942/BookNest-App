@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaHeart, FaRegHeart, FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
@@ -19,7 +18,9 @@ const Navbar = () => {
   useEffect(() => {
     const loadWishlistCount = () => {
       const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-      setWishlistCount(Array.isArray(wishlist) ? wishlist.length : Object.values(wishlist).length);
+      setWishlistCount(
+        Array.isArray(wishlist) ? wishlist.length : Object.values(wishlist).length
+      );
     };
     loadWishlistCount();
     window.addEventListener("wishlistUpdated", loadWishlistCount);
@@ -54,7 +55,6 @@ const Navbar = () => {
       const query = searchQuery.trim();
       if (query) {
         navigate(`/books/search/${encodeURIComponent(query)}`);
-        setSearchQuery("");
       }
     }
   };
@@ -89,29 +89,31 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* Right: Search + Icons */}
-        <div className="flex items-center gap-4">
-          <input
-            id="search"
-            type="text"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={handleSearchKeyDown}
-            className="hidden sm:block w-40 md:w-52 border border-gray-300 text-black rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-amber-400"
-          />
-
+        {/* Right Section: Search + Icons */}
+        <div className="flex items-center gap-4 sm:gap-6">
+          {/* Search Input */}
+          <div className="relative hidden sm:block">
+            <input
+              id="search"
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearchKeyDown}
+              className="w-40 md:w-52 border border-gray-300 text-black rounded px-2 py-1 pr-6 focus:outline-none focus:ring-2 focus:ring-amber-400"
+            />
             {searchQuery && (
-    <button
-      onClick={() => {
-        setSearchQuery("");
-        navigate("/"); 
-      }}
-      className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black text-lg"
-    >
-      ×
-    </button>
-  )}
+              <button
+                onClick={() => {
+                  setSearchQuery("");
+                  navigate("/");
+                }}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black text-lg"
+              >
+                ×
+              </button>
+            )}
+          </div>
 
           {/* Wishlist */}
           <button
@@ -154,10 +156,14 @@ const Navbar = () => {
         <div className="md:hidden bg-amber-50 border-t border-gray-200">
           <ul className="flex flex-col items-center gap-4 py-4 text-gray-800 font-semibold text-lg">
             <li>
-              <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
+              <Link to="/" onClick={() => setIsMenuOpen(false)}>
+                Home
+              </Link>
             </li>
             <li>
-              <Link to="/allProducts" onClick={() => setIsMenuOpen(false)}>Products</Link>
+              <Link to="/allProducts" onClick={() => setIsMenuOpen(false)}>
+                Products
+              </Link>
             </li>
             <li>
               <button
