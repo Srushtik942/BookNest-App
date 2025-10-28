@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   FaUserCircle,
 } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("personal");
@@ -36,7 +37,7 @@ const ProfilePage = () => {
   const handleSave = (e) => {
     e.preventDefault();
     setIsEditing(false);
-    alert(" Profile updated successfully!");
+    toast(" Profile updated successfully!");
   };
 
   //fetching data from localstorage
@@ -363,8 +364,6 @@ const grandTotal = orders.reduce((sum, o) => sum + orderTotal(o), 0);
     </div>
   </div>
 ))}
-
-
                   <div className="bg-white p-4 rounded-xl border shadow-sm text-gray-800 text-right font-semibold text-lg">
                     Grand Total: ₹{grandTotal.toFixed(2)}
                   </div>
@@ -374,6 +373,9 @@ const grandTotal = orders.reduce((sum, o) => sum + orderTotal(o), 0);
           </section>
         )}
       </main>
+<ToastContainer
+position="bottom-right"
+/>
     </div>
   );
 };
