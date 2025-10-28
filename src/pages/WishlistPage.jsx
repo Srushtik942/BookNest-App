@@ -1,23 +1,50 @@
+
 import React, { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import Read from "../assets/read.png";
+import { ToastContainer, toast } from "react-toastify";
 
 const WishlistPage = () => {
   const [books, setBooks] = useState([]);
-  const [wishlist, setWishlist] = useState(true);
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
+  //  Remove book from wishlist
   const RemoveProduct = (id) => {
     const updatedBooks = books.filter((book) => book._id !== id);
     setBooks(updatedBooks);
     localStorage.setItem("wishlist", JSON.stringify(updatedBooks));
+
+    // Notify Navbar
+    window.dispatchEvent(new Event("wishlistUpdated"));
+
+    toast.info("Book removed from wishlist!");
   };
 
-  const handleToCart = () => {
-    setWishlist(false);
-    alert("Book added to the cart!");
+  // Move book to cart
+  const handleToCart = (book) => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Prevent duplicate
+    const alreadyInCart = cart.some((item) => item._id === book._id);
+    if (alreadyInCart) {
+      toast.warn("Book already in cart!");
+      return;
+    }
+
+    // Add to cart
+    const updatedCart = [...cart, book];
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+    // Notify Navbar
+    window.dispatchEvent(new Event("cartUpdated"));
+
+    // Remove from wishlist after adding to cart
+    RemoveProduct(book._id);
+
+    toast.success("Book moved to cart!");
   };
 
+  //  Load wishlist from localStorage
   useEffect(() => {
     try {
       const storedWishlist = JSON.parse(localStorage.getItem("wishlist"));
@@ -28,13 +55,12 @@ const WishlistPage = () => {
           : Object.values(storedWishlist).filter(
               (item) => typeof item === "object"
             );
-
         setBooks(wishlistArray);
       } else {
         setBooks([]);
       }
     } catch (error) {
-      console.error("Error fetching wishlist from localStorage:", error);
+      console.error("Error fetching wishlist:", error);
       setBooks([]);
     }
   }, []);
@@ -46,7 +72,7 @@ const WishlistPage = () => {
           My Wishlist
         </h2>
 
-        {/* Grid of book cards */}
+        {/* book cards */}
         {Array.isArray(books) && books.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {books.map((book) => (
@@ -54,7 +80,7 @@ const WishlistPage = () => {
                 key={book._id}
                 className="relative bg-yellow-200 rounded-xl shadow-md p-4 flex flex-col items-center hover:shadow-xl transition"
               >
-                {/* heart icon */}
+                {/* Heart icon */}
                 <button
                   onClick={() => RemoveProduct(book._id)}
                   className="absolute top-3 -mx-2 right-3 text-red-500 hover:text-red-600 transition cursor-pointer"
@@ -77,7 +103,7 @@ const WishlistPage = () => {
                 </p>
 
                 <button
-                  onClick={handleToCart}
+                  onClick={() => handleToCart(book)}
                   className="text-white bg-amber-800 px-4 py-1 rounded-lg w-full hover:bg-amber-900 cursor-pointer"
                 >
                   Move To Cart
@@ -90,6 +116,10 @@ const WishlistPage = () => {
             Your wishlist is empty!
           </p>
         )}
+
+        {/*Keep only one ToastContainer here */}
+        <ToastContainer
+        />
       </div>
     </div>
   );

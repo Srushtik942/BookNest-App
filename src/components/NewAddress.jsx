@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAddress } from "../context/AddressContext";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const NewAddress = () => {
   const [name, setName] = useState("");
@@ -16,13 +17,13 @@ const NewAddress = () => {
 
     //  validation for address form
     if(!name || !city || !address || !pincode){
-      alert("Please fill in all fields before submitting!");
+      toast.error("Please fill in all fields before submitting!");
       return;
     }
 
     // validation for number
     if (pincode.length !== 6 || isNaN(pincode)) {
-       alert("Please enter a valid 6-digit numeric pincode!");
+       toast.error("Please enter a valid 6-digit numeric pincode!");
        return;
     }
 
@@ -90,6 +91,9 @@ const NewAddress = () => {
           Save Address
         </button>
       </form>
+      <ToastContainer
+      position="bottom-right"
+      />
     </div>
   );
 };

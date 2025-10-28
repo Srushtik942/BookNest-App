@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { FaHeart, FaRegHeart, FaStar } from "react-icons/fa";
 import Sidebar from '../components/Sidebar';
 import { useParams, Link } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 const ProductList = ({ isWished }) => {
   const { genre } = useParams();
@@ -46,12 +47,12 @@ const ProductList = ({ isWished }) => {
       const updatedWishlist = wishlist.filter((item) => item._id !== book._id);
       setWishlist(updatedWishlist);
       saveToLocalStorage("wishlist", updatedWishlist);
-      alert("Book removed from wishlist!");
+      toast("Book removed from wishlist!");
     } else {
       const updatedWishlist = [...wishlist, book];
       setWishlist(updatedWishlist);
       saveToLocalStorage("wishlist", updatedWishlist);
-      alert("Book added to wishlist!");
+      toast("Book added to wishlist!");
     }
   };
 
@@ -60,13 +61,13 @@ const ProductList = ({ isWished }) => {
 
   const handleAddToCart = (book) => {
     if (isInCart(book._id)) {
-      alert("This book is already in your cart!");
+      toast.warning("This book is already in your cart!");
       return;
     }
     const updatedCart = [...cart, book];
     setCart(updatedCart);
     saveToLocalStorage("cart", updatedCart);
-    alert("Book added to cart!");
+    toast("Book added to cart!");
   };
 
   /* --------------------  Fetch Books by Genre -------------------- */
@@ -186,6 +187,12 @@ const ProductList = ({ isWished }) => {
           </div>
         )}
       </div>
+      <ToastContainer
+      position='bottom-right'
+      autoClose={2000}
+      hideProgressBar={false}
+      closeOnClick
+      />
     </div>
   );
 };

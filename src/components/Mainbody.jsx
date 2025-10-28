@@ -5,6 +5,7 @@ import { FiArrowDownRight, FiCheckCircle, FiLock, FiTruck } from 'react-icons/fi
 import { FaRegHeart, FaStar, FaHeart } from "react-icons/fa"
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-scroll";
+import { toast, ToastContainer } from 'react-toastify';
 
 const Mainbody = () => {
   const [books, setBooks] = useState([]);
@@ -106,7 +107,7 @@ const Mainbody = () => {
       const existingCart = getCartItemFromLocalStorage();
 
       if (existingCart.some(item => item._id === book._id)) {
-        alert("Book already in cart!");
+        toast("Book already in cart!");
         return;
       }
 
@@ -124,7 +125,7 @@ const Mainbody = () => {
       const updatedCart = [...existingCart, cleanBook];
       setAddToCart(updatedCart);
       isInLocalStorage(updatedCart);
-      alert("Book added to cart!");
+      toast("Book added to cart!");
     } catch (error) {
       console.log("Error adding to cart", error);
     }
@@ -137,16 +138,16 @@ const Mainbody = () => {
         const updatedWishlist = wishlist.filter(item => item._id !== book._id);
         setWishlist(updatedWishlist);
         saveWishlistToLocalStorage(updatedWishlist);
-        alert("Book removed from wishlist!");
+        toast("Book removed from wishlist!");
       } else {
         const updatedWishlist = [...wishlist, book];
         setWishlist(updatedWishlist);
         saveWishlistToLocalStorage(updatedWishlist);
-        alert("Book added to wishlist!");
+        toast("Book added to wishlist!");
       }
     } catch (error) {
       console.error("Error managing wishlist:", error);
-      alert("Error updating wishlist");
+      toast("Error updating wishlist");
     }
   };
 
@@ -253,6 +254,7 @@ const Mainbody = () => {
                 className='text-white bg-amber-800 px-3 py-1 text-sm sm:text-lg rounded-lg w-full hover:bg-amber-900 cursor-pointer'>
                 Add to Cart
               </button>
+
             </div>
           ))}
         </div>
@@ -281,16 +283,30 @@ const Mainbody = () => {
                   className="text-red-900 text-xl sm:text-2xl rounded-full cursor-pointer hover:scale-110 transition-transform">
                   {isInWishlist(book._id) ? <FaHeart /> : <FaRegHeart />}
                 </button>
+
               </div>
               <button
                 onClick={() => handleAddToCart(book)}
                 className='text-white bg-amber-800 px-3 py-1 w-full rounded-lg text-sm sm:text-lg hover:bg-amber-900 cursor-pointer'>
                 Add to Cart
               </button>
+
             </div>
           ))}
         </div>
       </div>
+ <ToastContainer
+      position="bottom-right"
+      autoClose={2000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
     </div>
   );
 }

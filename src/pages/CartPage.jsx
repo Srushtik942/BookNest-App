@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Read from "../assets/read.png";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
 
 const CartPage = () => {
   const [quantity, setQuantity] = useState(1);
@@ -16,14 +17,17 @@ const CartPage = () => {
   const savings = totalDiscount;
 
   const handleClick = () => {
-    alert("🎉 Congratulations, your order has been placed successfully!");
+    toast.success("🎉 Congratulations, your order has been placed successfully!");
   };
 
-  const handleRemove = (id) => {
+  const handleRemove = (id, showToast= true) => {
     const updatedBooks = books.filter((book) => book._id !== id);
     setBooks(updatedBooks);
     localStorage.setItem("cart", JSON.stringify(updatedBooks));
-    alert("Book removed from cart!");
+
+    window.dispatchEvent(new Event("cartUpdated"));
+
+   if (showToast) toast.info("Book removed from cart!");
   };
 
   const handleMoveToWishlist = (book) => {
@@ -32,9 +36,12 @@ const CartPage = () => {
     wishlist.push(book);
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
+      window.dispatchEvent(new Event("wishlistUpdated"));
+  window.dispatchEvent(new Event("cartUpdated"));
+
     // remove from cart
-    handleRemove(book._id);
-    alert("Book moved to wishlist!");
+    // handleRemove(book._id,false);
+    toast("Book moved to wishlist!");
   };
 
   // Fetch cart data from localStorage
@@ -49,9 +56,9 @@ const CartPage = () => {
 
   return (
     <div className="py-8 min-h-screen">
-      <h2 className="text-black text-3xl font-semibold text-center mb-8">
+      <h1 className="text-black text-5xl font-bold text-center mb-8">
         My Cart
-      </h2>
+      </h1>
 
       <div className="mx-auto max-w-6xl p-4 flex flex-col lg:flex-row gap-6">
         {books.length > 0 ? (
@@ -194,6 +201,18 @@ const CartPage = () => {
           </div>
         )}
       </div>
+      <ToastContainer
+       position="bottom-right"
+      autoClose={2000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+      />
     </div>
   );
 };

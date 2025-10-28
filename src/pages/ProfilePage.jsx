@@ -156,9 +156,7 @@ const grandTotal = orders.reduce((sum, o) => sum + orderTotal(o), 0);
           </button>
         </nav>
 
-        <button className="mt-auto text-white bg-amber-600 hover:bg-amber-700 px-4 py-2 rounded-lg w-full font-medium">
-          Sign Out
-        </button>
+       
       </aside>
 
       {/* Main Content Area */}
@@ -311,27 +309,61 @@ const grandTotal = orders.reduce((sum, o) => sum + orderTotal(o), 0);
                     <div className="grid grid-cols-12 gap-4 items-center text-sm">
                       <div className="col-span-8 font-medium">Item</div>
                       <div className="col-span-1 text-right font-medium">Qty</div>
-                      <div className="col-span-2 text-right font-medium">Price</div>
+                      <div className="col-span-1 text-right font-medium">Price</div>
                       <div className="col-span-1 text-right font-medium">Total</div>
                     </div>
                   </div>
 
-                  {orders.map((o) => (
-                    <div key={o.id} className="bg-white p-4 rounded-xl border shadow-sm text-gray-700">
-                      {/* Mobile-friendly layout */}
-                      <div className="flex justify-between items-start text-sm sm:text-base">
-                        <div>
-                          <div className="font-semibold">{o.title}</div>
-                          <div className="text-xs text-gray-500">Purchased: {formatDate(o.purchasedAt)}</div>
-                        </div>
-                        <div className="text-right flex flex-col sm:flex-row sm:gap-4 items-end">
-                          <div className="text-xs sm:text-sm text-gray-500">Qty: {o.quantity}</div>
-                          <div className="text-sm text-gray-700">₹{o.price.toFixed(2)}</div>
-                          <div className="font-semibold text-base sm:text-lg">₹{orderTotal(o).toFixed(2)}</div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                    {orders.map((o) => (
+  <div
+    key={o.id}
+    className="bg-white p-4 rounded-xl border shadow-sm text-gray-700"
+  >
+    {/* Desktop Layout */}
+    <div className="hidden sm:grid grid-cols-12 gap-4 items-center">
+      {/* Item */}
+      <div className="col-span-8">
+        <div className="font-semibold text-base">{o.title}</div>
+        <div className="text-xs text-gray-500">
+          Purchased: {formatDate(o.purchasedAt)}
+        </div>
+      </div>
+
+      {/* Qty */}
+      <div className="col-span-1 text-right text-sm text-gray-500">
+        {o.quantity}
+      </div>
+
+      {/* Price */}
+      <div className="col-span-1 text-right text-sm text-gray-700">
+        ₹{o.price.toFixed(2)}
+      </div>
+
+      {/* Total */}
+      <div className="col-span-1 text-right font-semibold text-lg">
+        ₹{orderTotal(o).toFixed(2)}
+      </div>
+    </div>
+
+    {/* Mobile Layout */}
+    <div className="sm:hidden flex flex-col gap-2">
+      <div>
+        <div className="font-semibold">{o.title}</div>
+        <div className="text-xs text-gray-500">
+          Purchased: {formatDate(o.purchasedAt)}
+        </div>
+      </div>
+      <div className="flex justify-between text-sm text-gray-600">
+        <span>Qty: {o.quantity}</span>
+        <span>₹{o.price.toFixed(2)}</span>
+        <span className="font-semibold text-gray-800">
+          ₹{orderTotal(o).toFixed(2)}
+        </span>
+      </div>
+    </div>
+  </div>
+))}
+
 
                   <div className="bg-white p-4 rounded-xl border shadow-sm text-gray-800 text-right font-semibold text-lg">
                     Grand Total: ₹{grandTotal.toFixed(2)}
