@@ -103,12 +103,17 @@ const ProductList = ({ isWished }) => {
   return (
     <div className="flex min-h-screen relative">
       {/* Sidebar Toggle for Mobile */}
-      <button
-        className="md:hidden fixed top-20 left-4 z-20 bg-amber-800 text-white p-3 rounded-full shadow-lg"
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-      >
-        {isSidebarOpen ? 'Close Filters' : 'Filter Books'}
-      </button>
+<button
+  className={`md:hidden fixed top-18 left-4 z-50 p-2 rounded-md h-8 w-8 shadow-md transition-all duration-300 ${
+    isSidebarOpen ? " text-black" :" text-black"
+  }`}
+  onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+>
+  {isSidebarOpen ? "✕" : "☰"}
+</button>
+
+
+
 
       {/* Sidebar */}
       <div
