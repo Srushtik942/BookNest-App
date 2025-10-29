@@ -230,7 +230,7 @@ const Mainbody = () => {
       {/* Popular Books */}
       <div className='w-full'>
         <h2 className='text-gray-700 py-4 text-4xl sm:text-5xl playfair-heading text-center mb-7'>Our Popular Books</h2>
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 px-2 sm:px-10 max-w-7xl mx-auto'>
+<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 px-2 sm:px-10 max-w-7xl mx-auto'>
           {books.map(book => (
             <div key={book._id} className='bg-yellow-100 rounded-2xl shadow-lg flex flex-col items-center justify-center p-3 sm:p-4 hover:shadow-2xl transition-shadow cursor-pointer'>
               {/* Image remains fixed size (h-50 w-50) */}
@@ -265,7 +265,7 @@ const Mainbody = () => {
       {/* Best Selling Books */}
       <div id="bestSellingBook" className='w-full my-4'>
         <h2 className='text-gray-700 py-4 text-4xl sm:text-5xl playfair-heading text-center mb-7 '>Our Best Selling Books</h2>
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 px-2 sm:px-10 max-w-7xl mx-auto'>
+<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 px-2 sm:px-10 max-w-7xl mx-auto'>
           {booksRate.map(book => (
             <div key={book._id} className='rounded-2xl shadow-lg flex flex-col items-center justify-center p-3 sm:p-4 hover:shadow-2xl transition-shadow cursor-pointer'>
               {/* Image remains fixed size (h-50 w-50) */}
@@ -301,7 +301,7 @@ const Mainbody = () => {
       hideProgressBar={false}
       newestOnTop={false}
       closeOnClick
-      rtl={false} 
+      rtl={false}
        pauseOnFocusLoss
       draggable
       pauseOnHover

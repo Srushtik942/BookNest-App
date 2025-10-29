@@ -118,7 +118,7 @@ const ProductList = ({ isWished }) => {
           ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
           md:translate-x-0
           w-3/4 md:w-1/4
-          bg-amber-50 rounded-r-xl md:rounded-xl
+         rounded-r-xl md:rounded-xl
           z-10 transition-transform duration-300 ease-in-out p-4 md:p-0
         `}
       >
@@ -140,13 +140,13 @@ const ProductList = ({ isWished }) => {
             No books found for "{genre || "this category"}".
           </p>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
             {books.map((book) => (
               <div
                 key={book._id || book.id}
                 className="rounded-2xl shadow-lg flex flex-col items-center justify-center p-3 sm:p-4 hover:bg-amber-300 hover:shadow-2xl transition-all"
               >
-                <Link to={`/product/${book._id || book.id}`} className="w-full flex flex-col items-center">
+                {/* <Link to={`/product/${book._id || book.id}`} className="w-full flex flex-col items-center"> */}
                   <img
                     className="h-48 sm:h-56 md:h-64 w-full rounded-2xl mb-3 object-cover"
                     src={book.imageUrl}
@@ -155,7 +155,7 @@ const ProductList = ({ isWished }) => {
                   <h4 className="text-gray-700 font-semibold text-center hover:underline text-sm sm:text-base truncate w-full px-1">
                     {book.title}
                   </h4>
-                </Link>
+                {/* </Link> */}
 
                 <p className="text-gray-700 text-xs sm:text-sm mb-2 text-center">by {book.author}</p>
 
@@ -187,12 +187,6 @@ const ProductList = ({ isWished }) => {
           </div>
         )}
       </div>
-      {/* <ToastContainer
-      // position='bottom-right'
-      autoClose={2000}
-      hideProgressBar={false}
-      closeOnClick
-      /> */}
     </div>
   );
 };

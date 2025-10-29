@@ -77,7 +77,7 @@ const ProductList = () => {
   return (
     <div className="flex flex-col md:flex-row min-h-screen gap-4">
       {/* Sidebar */}
-      <div className="w-full md:w-1/4 bg-amber-50 rounded-xl">
+      <div className="w-full md:w-1/4  rounded-xl">
         <Sidebar setFilteredBooks={setBooks} />
       </div>
 

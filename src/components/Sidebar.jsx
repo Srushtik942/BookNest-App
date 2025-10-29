@@ -120,10 +120,10 @@ const handleCategoryChange = async (event) => {
   };
 
   return (
-    <div className="p-5">
+<div className="p-4 w-60 md:w-64 lg:w-72 bg-white shadow-md rounded-xl border border-gray-200 h-fit">
       {/* Header */}
-      <div className="flex justify-between border-b border-gray-300">
-        <h2 className="font-bold text-gray-800 text-2xl pb-3 text-left">
+<div className="flex justify-between items-center border-b border-gray-300 pb-2">
+        <h2 className="font-bold text-gray-800 text-xl pb-3 text-left">
           Filters
         </h2>
         <button
@@ -137,7 +137,7 @@ const handleCategoryChange = async (event) => {
       {/* ✅ Category Filters */}
       <div className="my-5">
         <h2 className="text-gray-900 font-bold text-xl">Category</h2>
-        <div className="my-4 space-y-2">
+        <div className="my-3 space-y-1.5">
           {[
             { id: "fictionId", label: "Fiction" },
             { id: "nonFictionId", label: "Non-Fiction" },
