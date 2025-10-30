@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 
-const Sidebar = ({ setFilteredBooks }) => {
+const Sidebar = ({ setFilteredBooks, setIsSidebarOpen }) => {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [selectedRating, setSelectedRating] = useState(0);
   const [selectedSort, setSelectedSort] = useState("");
@@ -126,12 +126,31 @@ const handleCategoryChange = async (event) => {
         <h2 className="font-bold text-gray-800 text-xl pb-3 text-left">
           Filters
         </h2>
-        <button
+
+        <div className="flex items-center gap-3">
+          {/* ✕ button visible only on mobile */}
+          <button
+            onClick={() => setIsSidebarOpen(false)}
+            className="text-black text-xl hover:text-red-600 md:hidden"
+          >
+            ✕
+          </button>
+
+          <button
+            onClick={handleRemoveFilter}
+            className="text-sm text-amber-700 hover:text-amber-900 font-semibold transition-colors duration-150 p-1 rounded-md cursor-pointer"
+          >
+            Clear All
+          </button>
+        </div>
+
+
+        {/* <button
           onClick={handleRemoveFilter}
           className="text-sm text-amber-700 hover:text-amber-900 font-semibold transition-colors duration-150 p-1 rounded-md cursor-pointer"
         >
           Clear All
-        </button>
+        </button> */}
       </div>
 
       {/* ✅ Category Filters */}

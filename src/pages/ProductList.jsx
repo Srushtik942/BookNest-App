@@ -102,15 +102,16 @@ const ProductList = ({ isWished }) => {
 
   return (
     <div className="flex min-h-screen relative">
-      {/* Sidebar Toggle for Mobile */}
+
+{/* Sidebar Toggle for Mobile */}
+{!isSidebarOpen && (
 <button
-  className={`md:hidden fixed top-18 left-4 z-50 p-2 rounded-md h-8 w-8 shadow-md transition-all duration-300 ${
-    isSidebarOpen ? " text-black" :" text-black"
-  }`}
-  onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+  className={`md:hidden fixed top-18 left-4 z-50 p-2 rounded-md h-8 w-8 shadow-md transition-all duration-300 text-black`}
+  onClick={() => setIsSidebarOpen(true)}
 >
-  {isSidebarOpen ? "✕" : "☰"}
+  ☰
 </button>
+)}
 
 
 
@@ -127,7 +128,7 @@ const ProductList = ({ isWished }) => {
           z-10 transition-transform duration-300 ease-in-out p-4 md:p-0
         `}
       >
-        <Sidebar setFilteredBooks={setBooks} />
+        <Sidebar setFilteredBooks={setBooks} setIsSidebarOpen={setIsSidebarOpen} />
       </div>
 
       {/* Main Content */}
