@@ -14,6 +14,7 @@ import NewAddress from "./components/NewAddress.jsx"
 import ProfilePage from "./pages/ProfilePage.jsx"
 import AllProducts from "./pages/AllProducts.jsx"
 import SearchResults from "./pages/SearchResults.jsx"
+import Products from './pages/Products.jsx'
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
          path: "books/search/:bookName", element: <SearchResults />
       },
+      {
+        path: "newProductDetails/:id",
+        element:<Products/>
+      }
     ]
   }
 ])

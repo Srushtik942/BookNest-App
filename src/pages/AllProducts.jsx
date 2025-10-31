@@ -3,6 +3,7 @@ import { FaHeart, FaRegHeart, FaStar } from "react-icons/fa";
 import Sidebar from "../components/Sidebar";
 import { toast, ToastContainer } from "react-toastify";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ProductList = () => {
   const [books, setBooks] = useState([]);
@@ -83,10 +84,6 @@ const ProductList = () => {
 
       {/* Main Content */}
       <div className="w-full md:w-3/4">
-        {/* <h2 className="text-gray-700 pb-4 text-2xl sm:text-3xl text-center mb-6">
-          {genre ? `Books in ${genre}` : "Showing All Books"}
-        </h2> */}
-
         {loading ? (
           <p className="text-center text-gray-500">Loading books...</p>
         ) : (
@@ -95,8 +92,12 @@ const ProductList = () => {
               const isWished = wishlist.some((item) => item._id === book._id);
 
               return (
+                <Link
+                  Link to={`/newProductDetails/${book._id}`}
+                 key={book._id}
+                 className="w-full"
+                >
                 <div
-                  key={book._id}
                   className="rounded-2xl shadow-lg flex flex-col items-center justify-center p-3 sm:p-4 hover:bg-amber-300 hover:shadow-2xl cursor-pointer w-full"
                 >
                   <img
@@ -117,9 +118,14 @@ const ProductList = () => {
                       {book.rating}
                       <FaStar className="text-yellow-500 text-base" />
                     </p>
+                    <p className="text-gray-800">{book.views}</p>
 
                     <button
-                      onClick={() => toggleWishlist(book)}
+                      onClick={(e) =>
+                        {
+                          e.preventDefault();
+                          toggleWishlist(book)
+                        }}
                       className="text-red-900 text-xl sm:text-2xl rounded-full cursor-pointer"
                     >
                       {isWished ? <FaHeart /> : <FaRegHeart />}
@@ -127,12 +133,17 @@ const ProductList = () => {
                   </div>
 
                   <button
-                    onClick={() => handleAddToCart(book)}
+                    onClick={(e) =>
+                      {
+                      e.preventDefault();
+                      handleAddToCart(book)
+                      }}
                     className="text-white bg-amber-800 px-3 sm:px-4 py-1 rounded-xl text-sm sm:text-base w-full hover:bg-amber-900 cursor-pointer"
                   >
                     Add to Cart
                   </button>
                 </div>
+                </Link>
               );
             })}
           </div>
