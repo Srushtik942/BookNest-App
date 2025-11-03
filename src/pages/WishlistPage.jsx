@@ -1,8 +1,10 @@
 
 import React, { useEffect, useState } from "react";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaHeartbeat } from "react-icons/fa";
 import Read from "../assets/read.png";
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
+
 
 const WishlistPage = () => {
   const [books, setBooks] = useState([]);
@@ -112,9 +114,21 @@ const WishlistPage = () => {
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-600 text-lg">
+          <div className="flex-1 bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-xl text-gray-700">
+          <p className="text-center text-gray-600 text-lg ">
             Your wishlist is empty!
+            <br></br>
+            <br></br>
+            <Link
+    to="/allProducts"
+    className="flex items-center gap-2 text-md font-bold text-amber-700 hover:text-amber-800 transition"
+  >
+    <FaHeartbeat className="text-lg" />
+    Let's wishlist Something!
+  </Link>
           </p>
+          </div>
+
         )}
 
         {/*Keep only one ToastContainer here */}

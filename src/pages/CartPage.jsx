@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Read from "../assets/read.png";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaStar, FaStarHalfAlt, FaShopify } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const CartPage = () => {
   const [quantity, setQuantity] = useState(1);
@@ -208,9 +209,19 @@ const CartPage = () => {
             </div>
           </>
         ) : (
-          <div className="flex-1 bg-white p-6 rounded-lg shadow-md text-center text-xl text-gray-700">
-            Your cart is empty.
-          </div>
+          <div className="flex-1 bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-xl text-gray-700">
+  <p className="mb-4 text-center">Cart is empty.</p>
+
+  <Link
+    to="/allProducts"
+    className="flex items-center gap-2 text-md font-bold text-amber-700 hover:text-amber-800 transition"
+  >
+    <FaShopify className="text-lg" />
+    Let's Shop Something!
+  </Link>
+</div>
+
+
         )}
       </div>
 
