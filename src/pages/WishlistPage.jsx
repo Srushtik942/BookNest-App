@@ -124,7 +124,7 @@ const WishlistPage = () => {
     className="flex items-center gap-2 text-md font-bold text-amber-700 hover:text-amber-800 transition"
   >
     <FaHeartbeat className="text-lg" />
-    Let's wishlist Something!
+    Let's Wishlist Something!
   </Link>
           </p>
           </div>
