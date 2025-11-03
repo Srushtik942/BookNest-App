@@ -7,8 +7,6 @@ const Sidebar = ({ setFilteredBooks, setIsSidebarOpen }) => {
   const [selectedSort, setSelectedSort] = useState("");
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
-  // ✅ Category Change Handler
-  // ✅ Category Change Handler
 const handleCategoryChange = async (event) => {
   const genre = event.target.id;
   const genreName =
@@ -32,7 +30,7 @@ const handleCategoryChange = async (event) => {
     let res, data;
 
     if (updatedGenres.length > 1) {
-      // ✅ Multi-genre API call
+      //  Multi-genre API call
       const genresParam = updatedGenres.join(",");
       res = await fetch(`${baseUrl}/products/genres?genres=${genresParam}`);
       data = await res.json();
@@ -43,7 +41,7 @@ const handleCategoryChange = async (event) => {
         setFilteredBooks([]);
       }
     } else if (updatedGenres.length === 1) {
-      // ✅ Single-genre API call
+
       res = await fetch(`${baseUrl}/products/genre/${updatedGenres[0]}`);
       data = await res.json();
 
@@ -53,7 +51,6 @@ const handleCategoryChange = async (event) => {
         setFilteredBooks([]);
       }
     } else {
-      // ✅ No filters selected → Fetch all
       res = await fetch(`${baseUrl}/books`);
       data = await res.json();
       setFilteredBooks(data.books);
@@ -64,7 +61,6 @@ const handleCategoryChange = async (event) => {
 };
 
 
-  // ✅ Rating Change Handler
   const handleRatingChange = async () => {
   try {
     const res = await fetch(`${baseUrl}/products/rating/${selectedRating}`);
@@ -86,7 +82,6 @@ const handleCategoryChange = async (event) => {
 };
 
 
-  // ✅ Price Sort Handler
   const handlePriceSort = async (event) => {
     const sortValue = event.target.value;
     setSelectedSort(sortValue);
@@ -105,7 +100,7 @@ const handleCategoryChange = async (event) => {
     }
   };
 
-  // ✅ Remove All Filters
+  //  Remove All Filters
   const handleRemoveFilter = async () => {
     setSelectedGenres([]);
     setSelectedRating(0);
@@ -144,16 +139,9 @@ const handleCategoryChange = async (event) => {
           </button>
         </div>
 
-
-        {/* <button
-          onClick={handleRemoveFilter}
-          className="text-sm text-amber-700 hover:text-amber-900 font-semibold transition-colors duration-150 p-1 rounded-md cursor-pointer"
-        >
-          Clear All
-        </button> */}
       </div>
 
-      {/* ✅ Category Filters */}
+      {/*  Category Filters */}
       <div className="my-5">
         <h2 className="text-gray-900 font-bold text-xl">Category</h2>
         <div className="my-3 space-y-1.5">
@@ -178,7 +166,7 @@ const handleCategoryChange = async (event) => {
         </div>
       </div>
 
-      {/* ✅ Rating Filter */}
+      {/*  Rating Filter */}
       <div className="mt-8 my-10">
         <h2 className="text-xl font-bold text-gray-900 mb-4">Rating</h2>
         <div className="flex flex-col items-center">
@@ -201,7 +189,7 @@ const handleCategoryChange = async (event) => {
         </div>
       </div>
 
-      {/* ✅ Sort by Price */}
+      {/*  Sort by Price */}
       <div className="text-gray-800 my-10">
         <h2 className="my-2 text-xl font-bold">Price</h2>
 

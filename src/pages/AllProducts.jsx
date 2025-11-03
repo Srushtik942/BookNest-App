@@ -9,11 +9,12 @@ const ProductList = () => {
   const [books, setBooks] = useState([]);
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(true);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const { genre } = useParams();
 
-  // ✅ Load books
+  //  Load books
   useEffect(() => {
     const fetchBooks = async () => {
       try {
@@ -34,13 +35,13 @@ const ProductList = () => {
     fetchBooks();
   }, [baseUrl, genre]);
 
-  // ✅ Load wishlist from localStorage on mount
+  //  Load wishlist from localStorage on mount
   useEffect(() => {
     const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     setWishlist(storedWishlist);
   }, []);
 
-  // ✅ Handle Add/Remove Wishlist toggle
+  //  Handle Add/Remove Wishlist toggle
   const toggleWishlist = (book) => {
     const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     const isAlreadyWished = storedWishlist.some((item) => item._id === book._id);
@@ -55,11 +56,11 @@ const ProductList = () => {
     }
 
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
-    setWishlist(updatedWishlist); // ✅ Update state (triggers re-render)
+    setWishlist(updatedWishlist); //  Update state (triggers re-render)
     window.dispatchEvent(new Event("wishlistUpdated"));
   };
 
-  // ✅ Add to Cart
+  //  Add to Cart
   const handleAddToCart = (book) => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     const isAlreadyInCart = storedCart.some((item) => item._id === book._id);
@@ -76,11 +77,32 @@ const ProductList = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen gap-4">
+    <div className="flex flex-col md:flex-row min-h-screen gap-4 relative">
       {/* Sidebar */}
-      <div className="w-full md:w-1/4  rounded-xl">
-        <Sidebar setFilteredBooks={setBooks} />
-      </div>
+      {!isSidebarOpen && (
+      <button
+        className="md:hidden fixed top-20 left-4 z-50 p-2  rounded-md shadow-md text-black"
+        onClick={() => setIsSidebarOpen(true)}
+      >
+        ☰
+      </button>
+    )}
+
+     <div
+      className={`fixed md:static top-0 left-0 h-full md:h-auto z-40 md:z-auto transition-transform duration-300 w-3/4 md:w-1/4 rounded-xl shadow-lg md:shadow-none
+      ${isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
+    >
+
+
+      <Sidebar setFilteredBooks={setBooks} setIsSidebarOpen={setIsSidebarOpen} />
+    </div>
+
+     {isSidebarOpen && (
+      <div
+        className="fixed inset-0 bg-opacity-40 z-30 md:hidden"
+        onClick={() => setIsSidebarOpen(false)}
+      ></div>
+    )}
 
       {/* Main Content */}
       <div className="w-full md:w-3/4">

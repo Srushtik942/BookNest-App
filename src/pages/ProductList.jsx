@@ -70,7 +70,6 @@ const ProductList = ({ isWished }) => {
     toast("Book added to cart!");
   };
 
-  /* --------------------  Fetch Books by Genre -------------------- */
 
   useEffect(() => {
     const fetchBooksByGenre = async () => {
