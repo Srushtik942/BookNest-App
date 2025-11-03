@@ -10,6 +10,7 @@ const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [wishlistCount, setWishlistCount] = useState(0);
   const [cartCount, setCartCount] = useState(0);
+  const [addressCount, setAddressCount] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -48,6 +49,24 @@ const Navbar = () => {
       window.removeEventListener("storage", loadCartCount);
     };
   }, []);
+
+  // load address count
+
+  useEffect(()=>{
+    const addressCount = () =>{
+      const address = JSON.parse(localStorage.getItem("addresses")) || [];
+      setAddressCount(address.length);
+    };
+    addressCount();
+    window.addEventListener("addressUpdated", addressCount);
+    window.addEventListener("storage",addressCount);
+
+    return()=>{
+      window.removeEventListener("addressUpdated",addressCount);
+      window.removeEventListener("storage",addressCount);
+
+    }
+  })
 
   // 🔍 Handle Search with Enter Key
   const handleSearchKeyDown = (e) => {
@@ -140,6 +159,7 @@ const Navbar = () => {
           <button>
             <Link to="/addAddress">
             <FaLocationDot size={25} className="text-gray-800 hover:text-amber-700"/>
+            <span className="absolute right-18 top-4 bg-red-500 text-white text-xs rounded-full px-1" >{addressCount}</span>
             </Link>
           </button>
 
