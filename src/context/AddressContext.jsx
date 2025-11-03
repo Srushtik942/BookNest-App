@@ -43,6 +43,17 @@ const addAddress = (newAddr) => {
     setAddresses(updated);
   };
 
+
+  // Update  existing address
+const updateAddress = (id, updatedData) => {
+  const updated = addresses.map(addr =>
+    addr.id === id ? { ...addr, ...updatedData } : addr
+  );
+  setAddresses(updated);
+  localStorage.setItem("addresses", JSON.stringify(updated));
+};
+
+
   // delete
   const deleteAddress = (id) => {
   const updated = addresses.filter(addr => addr.id !== id);
@@ -52,7 +63,7 @@ const addAddress = (newAddr) => {
 
 
   return (
-    <AddressContext.Provider value={{ addresses, addAddress, deleteAddress }}>
+    <AddressContext.Provider value={{ addresses, addAddress, deleteAddress,updateAddress  }}>
       {children}
     </AddressContext.Provider>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaHeart, FaRegHeart, FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
-import { FaMapLocation } from "react-icons/fa6";
+import { FaMapLocation,FaLocationDot  } from "react-icons/fa6";
 import AddressManagement from "../pages/AddressManagement";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -25,7 +25,7 @@ const Navbar = () => {
     loadWishlistCount();
     window.addEventListener("wishlistUpdated", loadWishlistCount);
     window.addEventListener("storage", loadWishlistCount);
-    
+
 
     return () => {
       window.removeEventListener("wishlistUpdated", loadWishlistCount);
@@ -135,6 +135,12 @@ const Navbar = () => {
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
               {cartCount}
             </span>
+          </button>
+          {/* location */}
+          <button>
+            <Link to="/addAddress">
+            <FaLocationDot size={25} className="text-gray-800 hover:text-amber-700"/>
+            </Link>
           </button>
 
           {/* Profile */}

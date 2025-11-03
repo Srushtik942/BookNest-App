@@ -6,18 +6,26 @@ import { ToastContainer, toast } from "react-toastify";
 const CartPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [books, setBooks] = useState([]);
+  const [showSummary, setShowSummary] = useState(false);
 
-  const pricePerItem = 2000;
-  const discount = 1000;
+
   const deliveryCharges = 499;
 
-  const subtotal = pricePerItem * quantity;
-  const totalDiscount = discount * quantity;
-  const totalAmount = subtotal - totalDiscount + deliveryCharges;
+  const subtotal = books.reduce((acc,book)=> acc + (book.originalPrice)*quantity,0)
+
+  const totalDiscount = books.reduce((acc, book) => {
+  const oldPrice = book.oldPrice || (book.originalPrice / 0.7);
+  const discountPerBook = (oldPrice - book.originalPrice) * quantity;
+  return acc + (discountPerBook > 0 ? discountPerBook : 0);
+}, 0);
+
+  const totalAmount = subtotal - totalDiscount + (books.length > 0 ? deliveryCharges : 0);
+
   const savings = totalDiscount;
 
   const handleClick = () => {
     toast.success("🎉 Congratulations, your order has been placed successfully!");
+    setShowSummary(true);
   };
 
   const handleRemove = (id, showToast= true) => {
@@ -31,7 +39,7 @@ const CartPage = () => {
   };
 
   const handleMoveToWishlist = (book) => {
-    // example: add to wishlist
+
     let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     wishlist.push(book);
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
@@ -40,7 +48,7 @@ const CartPage = () => {
   window.dispatchEvent(new Event("cartUpdated"));
 
     // remove from cart
-    // handleRemove(book._id,false);
+
     toast("Book moved to wishlist!");
   };
 
@@ -63,7 +71,7 @@ const CartPage = () => {
       <div className="mx-auto max-w-6xl p-4 flex flex-col lg:flex-row gap-6">
         {books.length > 0 ? (
           <>
-            {/* 🛒 Cart Items */}
+            {/* Cart Items */}
             <div className="flex-1 flex flex-col gap-6">
               {books.map((book, index) => (
                 <div
@@ -85,7 +93,7 @@ const CartPage = () => {
                         by {book.author} | Category: {book.genre}
                       </p>
 
-                      {/* ⭐ Rating */}
+                      {/*  Rating */}
                       <div className="flex items-center my-2">
                         <span className="text-yellow-500 flex items-center">
                           <FaStar />
@@ -99,21 +107,25 @@ const CartPage = () => {
                         </span>
                       </div>
 
-                      {/* 💰 Price */}
+                      {/*  Price */}
                       <div className="flex items-center my-2">
                         <span className="text-black text-xl font-semibold">
-                          ₹{book.originalPrice || pricePerItem}
+                          ₹{book.originalPrice}
                         </span>
                         <span className="text-gray-400 line-through text-lg mx-3">
-                          ₹{(book.originalPrice || pricePerItem) + 300}
+                          ₹{book.oldPrice || Math.round(book.originalPrice / 0.7)}
                         </span>
                         <span className="text-green-600 font-semibold">
-                          30% off
+                           {Math.round(
+                             ((book.oldPrice || book.originalPrice / 0.7) - book.originalPrice) /
+                             (book.oldPrice || book.originalPrice / 0.7) *
+                              100
+    )} % off
                         </span>
                       </div>
                     </div>
 
-                    {/* ➕➖ Quantity & Actions */}
+                    {/*  Quantity & Actions */}
                     <div className="mt-4 pt-4 border-t border-gray-200">
                       <div className="flex items-center mb-6">
                         <span className="text-black font-semibold mr-4">
@@ -160,7 +172,7 @@ const CartPage = () => {
               ))}
             </div>
 
-            {/* 💳 Price Details */}
+            {/*  Price Details */}
             <div className="lg:w-96 flex-shrink-0 bg-white p-6 rounded-lg shadow-md h-fit">
               <h2 className="text-black text-xl font-semibold mb-4 border-b pb-2">
                 PRICE DETAILS
@@ -169,11 +181,11 @@ const CartPage = () => {
                 <span>
                   Price ({books.length} item{books.length > 1 ? "s" : ""})
                 </span>
-                <span>₹{subtotal}</span>
+                <span>₹{Math.round(subtotal)}</span>
               </div>
               <div className="flex justify-between mb-2 text-black">
                 <span>Discount</span>
-                <span className="text-black font-semibold">- ₹{totalDiscount}</span>
+                <span className="text-black font-semibold">- ₹{totalDiscount.toFixed(2)}</span>
               </div>
               <div className="flex justify-between mb-2 text-black">
                 <span>Delivery Charges</span>
@@ -182,10 +194,10 @@ const CartPage = () => {
               <hr className="my-3 border-gray-400" />
               <div className="flex justify-between font-bold text-lg mb-2 text-black">
                 <span>TOTAL AMOUNT</span>
-                <span>₹{totalAmount}</span>
+                <span>₹{Math.round(totalAmount)}</span>
               </div>
               <p className="text-green-600 mb-4 font-medium border-t pt-4">
-                You will save ₹{savings} on this order!
+                You will save ₹{savings.toFixed(2)} on this order!
               </p>
               <button
                 onClick={handleClick}
@@ -201,7 +213,59 @@ const CartPage = () => {
           </div>
         )}
       </div>
-      <ToastContainer
+
+{showSummary && (
+  <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-black/30 z-50">
+    <div className="bg-white rounded-xl p-6 w-full max-w-lg shadow-2xl animate-fadeIn">
+      <h2 className="text-2xl font-bold text-black mb-4 text-center">Order Summary</h2>
+
+      <div className="max-h-64 overflow-y-auto">
+        {books.length > 0 ? (
+          books.map((book, i) => (
+            <div
+              key={i}
+              className="flex justify-between items-center border-b border-gray-200 py-2"
+            >
+              <div>
+                <h3 className="text-black font-semibold">{book.title}</h3>
+                <p className="text-gray-500 text-sm">{book.author}</p>
+              </div>
+              <p className="text-black font-medium">₹{book.originalPrice || 2000}</p>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-600 text-center py-4">Your cart was empty.</p>
+        )}
+      </div>
+
+      <div className="mt-4 border-t border-gray-300 pt-4">
+        <p className="text-lg font-semibold text-black flex justify-between">
+          <span>Total:</span>
+          <span>₹{Math.round(totalAmount)}</span>
+        </p>
+        <p className="text-green-600 text-sm mt-2 text-center">
+          You saved ₹{savings.toFixed(2)} on this order!
+        </p>
+      </div>
+
+      <div className="mt-6 flex justify-center">
+        <button
+          onClick={() => {
+      setShowSummary(false)
+      setBooks([]);
+      localStorage.removeItem("cart");
+      window.dispatchEvent(new Event("cartUpdated"));
+
+          }}
+          className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+ <ToastContainer
       //  position="bottom-right"
       autoClose={2000}
       hideProgressBar={false}
