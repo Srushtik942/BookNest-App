@@ -135,6 +135,7 @@ const Navbar = () => {
             )}
           </div>
 
+          <div className="flex items-center gap-4 relative">
           {/* Wishlist */}
           <button
             onClick={() => navigate("/wishlist")}
@@ -159,7 +160,7 @@ const Navbar = () => {
           <button>
             <Link to="/addAddress">
             <FaLocationDot size={25} className="text-gray-800 hover:text-amber-700"/>
-            <span className="absolute right-18 top-4 bg-red-500 text-white text-xs rounded-full px-1" >{addressCount}</span>
+            <span className="absolute -top-2 left-24 bg-red-500 text-white text-xs rounded-full px-1" >{addressCount}</span>
             </Link>
           </button>
 
@@ -167,6 +168,7 @@ const Navbar = () => {
           <Link to="/profile">
             <FaUserCircle className="text-3xl text-gray-700 hover:text-black" />
           </Link>
+          </div>
 
           {/* Hamburger Icon (Mobile) */}
           <button
