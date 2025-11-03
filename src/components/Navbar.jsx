@@ -25,6 +25,7 @@ const Navbar = () => {
     loadWishlistCount();
     window.addEventListener("wishlistUpdated", loadWishlistCount);
     window.addEventListener("storage", loadWishlistCount);
+    
 
     return () => {
       window.removeEventListener("wishlistUpdated", loadWishlistCount);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaHeart, FaRegHeart, FaStar, FaEye } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaStar, FaEye, FaFire } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import { useParams } from "react-router-dom";
 
@@ -11,7 +11,7 @@ const Products = () => {
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const { id } = useParams();
 
-  // ✅ Load book details
+  // Load book details
   useEffect(() => {
     const loadBook = async () => {
       try {
@@ -36,13 +36,13 @@ const Products = () => {
     if (id) loadBook();
   }, [id, baseUrl]);
 
-  // ✅ Load wishlist
+  //  Load wishlist
   useEffect(() => {
     const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     setWishlist(storedWishlist);
   }, []);
 
-  // ✅ Toggle Wishlist
+  //  Toggle Wishlist
   const toggleWishlist = (book) => {
     const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     const isAlreadyWished = storedWishlist.some((item) => item._id === book._id);
@@ -58,9 +58,10 @@ const Products = () => {
 
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
     setWishlist(updatedWishlist);
+    window.dispatchEvent(new Event("wishlistUpdated"));
   };
 
-  // ✅ Add to Cart
+  //  Add to Cart
   const handleAddToCart = (book) => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     const isAlreadyInCart = storedCart.some((item) => item._id === book._id);
@@ -72,6 +73,7 @@ const Products = () => {
 
     storedCart.push(book);
     localStorage.setItem("cart", JSON.stringify(storedCart));
+    window.dispatchEvent(new Event("cartUpdated"));
     toast.success("Book added to cart!");
   };
 
@@ -88,16 +90,23 @@ const Products = () => {
   const isWished = wishlist.some((item) => item._id === book._id);
 
   return (
-    <div className="flex justify-center items-center min-h-screen px-4">
+    <div className="flex justify-center items-center min-h-screen px-4 ">
     {/* <h2 h2 className="text-black text-3xl">Book Details</h2> */}
-      <div className="bg-amber-100 rounded-2xl shadow-xl p-6 sm:p-10 max-w-3xl w-full hover:bg-amber-300">
-        <div className="flex flex-col md:flex-row items-center gap-8">
+      <div className="bg-amber-200 rounded-2xl shadow-xl p-6 sm:p-10 max-w-5xl w-full hover:bg-amber-300 min-h-[550px]">
+        <div className="flex flex-col md:flex-row items-center gap-8 ">
+          <div className="relative">
           {/* Image */}
           <img
-            className="w-64 h-80 object-cover rounded-2xl shadow-lg"
+            className="w-64 h-[20rem] object-cover rounded-2xl shadow-lg"
             src={book.imageUrl || "/placeholder.png"}
             alt={book.title}
           />
+          {book.bestSeller && (
+              <div className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-md">
+                <FaFire className="text-yellow-300" /> Best Seller
+              </div>
+            )}
+          </div>
 
           {/* Info Section */}
           <div className="flex-1 text-center md:text-left">
@@ -126,7 +135,7 @@ const Products = () => {
             </p>
 
             {book.summary && (
-              <p className="text-gray-700 text-sm leading-relaxed mb-4">
+              <p className="text-gray-700 text-base  leading-relaxed mb-4">
                 {book.summary}
               </p>
             )}
