@@ -87,7 +87,7 @@ const Products = () => {
       <p className="text-center text-gray-600 mt-10">No book found.</p>
     );
 
-  const isWished = wishlist.some((item) => item._id === book._id);
+  const isWished =   Array.isArray(wishlist) && wishlist.some((item) => item._id === book._id);
 
   return (
     <div className="flex justify-center items-center min-h-screen px-4 ">
