@@ -11,7 +11,7 @@ function App() {
     <>
       <AddressProvider>
         <Navbar />
-        <div className="pt-13">
+        <div className="pt-22">
           <Outlet />
         </div>
         <Footer />

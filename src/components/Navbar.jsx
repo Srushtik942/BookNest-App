@@ -80,11 +80,11 @@ const Navbar = () => {
   };
 
   return (
-    <header className="top-0 left-0 w-full bg-amber-100 shadow-sm z-50">
-      <nav className="flex items-center justify-between mx-4 sm:mx-5 py-4 relative z-50">
+    <header className="top-0 left-0 fixed z-50">
+      <nav className="flex items-center justify-between px-2 sm:px-6 md:px-10 py-4 fixed top-0 left-0 right-0 bg-amber-100 shadow-sm z-50">
         {/* Left: Logo */}
         <h3
-          className="playfair-heading text-gray-800 text-3xl sm:text-4xl font-semibold cursor-pointer"
+        className="playfair-heading text-gray-800 text-2xl sm:text-3xl font-semibold"
           onClick={() => navigate("/")}
         >
           KitabKart.com
@@ -110,7 +110,7 @@ const Navbar = () => {
         </ul>
 
         {/* Right Section: Search + Icons */}
-        <div className="flex items-center gap-4 sm:gap-6">
+      <div className="flex items-center gap-2 sm:gap-4 md:gap-6">
           {/* Search Input */}
           <div className="relative hidden sm:block">
             <input
@@ -173,7 +173,7 @@ const Navbar = () => {
           {/* Hamburger Icon (Mobile) */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-gray-800 text-2xl sm:ml-0 focus:outline-none"
+            className="md:hidden text-gray-800 text-2xl ml-2 focus:outline-none"
           >
             {isMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
@@ -181,45 +181,47 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Dropdown Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-amber-50 border-t border-gray-200">
-          <ul className="flex flex-col items-center gap-4 py-4 text-gray-800 font-semibold text-lg">
-            <li>
-              <Link to="/" onClick={() => setIsMenuOpen(false)}>
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/allProducts" onClick={() => setIsMenuOpen(false)}>
-                Products
-              </Link>
-            </li>
-            <li>
-              <button
-                onClick={() => {
-                  setShowModal(true);
-                  setIsMenuOpen(false);
-                }}
-                className="flex items-center gap-2"
-              >
-                <FaMapLocation className="text-lg" />
-                Deliver to {userName}
-              </button>
-            </li>
-            <li>
-              <input
-                id="search"
-                type="text"
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={handleSearchKeyDown}
-                className="w-60 border border-gray-300 text-black rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-amber-400"
-              />
-            </li>
-          </ul>
-        </div>
-      )}
+      {/* Mobile Dropdown Menu */}
+{isMenuOpen && (
+  <div className="fixed top-16 left-0 w-full bg-amber-50 border-t border-gray-200 shadow-md z-40">
+    <ul className="flex flex-col items-center gap-4 py-4 text-gray-800 font-semibold text-lg">
+      <li>
+        <Link to="/" onClick={() => setIsMenuOpen(false)}>
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link to="/allProducts" onClick={() => setIsMenuOpen(false)}>
+          Products
+        </Link>
+      </li>
+      <li>
+        <button
+          onClick={() => {
+            setShowModal(true);
+            setIsMenuOpen(false);
+          }}
+          className="flex items-center gap-2"
+        >
+          <FaMapLocation className="text-lg" />
+          Deliver to {userName}
+        </button>
+      </li>
+      <li>
+        <input
+          id="search"
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleSearchKeyDown}
+          className="w-60 border border-gray-300 text-black rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-amber-400"
+        />
+      </li>
+    </ul>
+  </div>
+)}
+
 
       {/* Address Modal */}
       {showModal && <AddressManagement onClose={() => setShowModal(false)} />}
