@@ -36,10 +36,20 @@ const ProductList = () => {
   }, [baseUrl, genre]);
 
   //  Load wishlist from localStorage on mount
-  useEffect(() => {
-    const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    setWishlist(storedWishlist);
-  }, []);
+ useEffect(() => {
+  try {
+    const storedWishlist = JSON.parse(localStorage.getItem("wishlist"));
+    if (Array.isArray(storedWishlist)) {
+      setWishlist(storedWishlist);
+    } else {
+      setWishlist([]);
+    }
+  } catch (err) {
+    console.error("Invalid wishlist data:", err);
+    setWishlist([]);
+  }
+}, []);
+
 
   //  Handle Add/Remove Wishlist toggle
   const toggleWishlist = (book) => {
@@ -111,7 +121,7 @@ const ProductList = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 px-4 sm:px-10 max-w-7xl mx-auto">
             {books.map((book) => {
-              const isWished = wishlist.some((item) => item._id === book._id);
+              const isWished =   Array.isArray(wishlist) && wishlist.some((item) => item._id === book._id);
 
               return (
                 <Link
