@@ -66,7 +66,7 @@ const Navbar = () => {
       window.removeEventListener("storage",addressCount);
 
     }
-  })
+  },[])
 
   // 🔍 Handle Search with Enter Key
   const handleSearchKeyDown = (e) => {
@@ -81,7 +81,7 @@ const Navbar = () => {
 
   return (
     <header className="top-0 left-0 w-full bg-amber-100 shadow-sm z-50">
-      <nav className="flex items-center justify-between mx-5 py-4">
+      <nav className="flex items-center justify-between mx-4 sm:mx-5 py-4 relative z-50">
         {/* Left: Logo */}
         <h3
           className="playfair-heading text-gray-800 text-3xl sm:text-4xl font-semibold cursor-pointer"
@@ -139,7 +139,7 @@ const Navbar = () => {
           {/* Wishlist */}
           <button
             onClick={() => navigate("/wishlist")}
-            className="relative cursor-pointer"
+            className="relative cursor-pointer ml-3 sm:ml-0"
           >
             <FaRegHeart size={23} className="text-gray-800 hover:text-amber-700" />
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
@@ -173,7 +173,7 @@ const Navbar = () => {
           {/* Hamburger Icon (Mobile) */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-gray-800 text-2xl ml-2 focus:outline-none"
+            className="md:hidden text-gray-800 text-2xl sm:ml-0 focus:outline-none"
           >
             {isMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
