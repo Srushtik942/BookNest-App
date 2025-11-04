@@ -43,7 +43,7 @@ const ProfilePage = () => {
   //fetching data from localstorage
 const loadOrderFromLocalStorage = () => {
   try {
-    const data = localStorage.getItem("cart");
+    const data = localStorage.getItem("orders");
     if (!data) {
       setOrders([]);
       return;
@@ -53,15 +53,15 @@ const loadOrderFromLocalStorage = () => {
 
     if (Array.isArray(jsonData)) {
 
-      const orders= jsonData.map(item => ({
-        id: item._id || Math.random(),
-        ...item,
-        quantity: 1,
-        price: item.originalPrice || 0,
-        purchasedAt: new Date().toISOString()
-      }));
+//       const orders= jsonData.map(item => ({
+//         id: item._id || Math.random(),
+//         ...item,
+//         quantity: 1,
+//         price: item.originalPrice || 0,
+//         purchasedAt: new Date().toISOString()
+//       }));
 
-      setOrders(orders);
+      setOrders(jsonData);
     } else {
       setOrders([]);
     }

@@ -27,7 +27,21 @@ const CartPage = () => {
   const handleClick = () => {
     toast.success("🎉 Congratulations, your order has been placed successfully!");
     setShowSummary(true);
+    const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    const newOrders = books.map((book) => ({
+      id: book._id || Math.random(),
+      ...book,
+      quantity,
+      price: book.originalPrice || 0,
+      purchasedAt: new Date().toISOString(),
+    }));
+
+    localStorage.setItem("orders", JSON.stringify([...existingOrders, ...newOrders]));
+
+
   };
+
+
 
   const handleRemove = (id, showToast= true) => {
     const updatedBooks = books.filter((book) => book._id !== id);
