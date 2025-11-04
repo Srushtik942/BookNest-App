@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
-import { FaHeart, FaRegHeart, FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaUserCircle, FaBars, FaTimes,FaMapMarkerAlt  } from "react-icons/fa";
 import { FaMapLocation,FaLocationDot  } from "react-icons/fa6";
 import AddressManagement from "../pages/AddressManagement";
 import { Link, useNavigate } from "react-router-dom";
@@ -103,8 +103,8 @@ const Navbar = () => {
               className="flex items-center gap-2"
               onClick={() => setShowModal(true)}
             >
-              <FaMapLocation className="text-lg" />
-              Deliver to {userName}
+              <FaMapMarkerAlt  className="text-lg" />
+             Select Address
             </button>
           </li>
         </ul>
