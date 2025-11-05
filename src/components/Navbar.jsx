@@ -98,15 +98,7 @@ const Navbar = () => {
           <li className="cursor-pointer hover:text-amber-800">
             <Link to="/allProducts">Products</Link>
           </li>
-          <li className="cursor-pointer hover:text-amber-800">
-            <button
-              className="flex items-center gap-2"
-              onClick={() => setShowModal(true)}
-            >
-              <FaMapMarkerAlt  className="text-lg" />
-             Select Address
-            </button>
-          </li>
+
         </ul>
 
         {/* Right Section: Search + Icons */}
@@ -156,13 +148,13 @@ const Navbar = () => {
               {cartCount}
             </span>
           </button>
-          {/* location */}
+          {/* location
           <button>
             <Link to="/addAddress">
             <FaLocationDot size={25} className="text-gray-800 hover:text-amber-700"/>
             <span className="absolute -top-2 left-24 bg-red-500 text-white text-xs rounded-full px-1" >{addressCount}</span>
             </Link>
-          </button>
+          </button> */}
 
           {/* Profile */}
           <Link to="/profile">
@@ -195,18 +187,7 @@ const Navbar = () => {
           Products
         </Link>
       </li>
-      <li>
-        <button
-          onClick={() => {
-            setShowModal(true);
-            setIsMenuOpen(false);
-          }}
-          className="flex items-center gap-2"
-        >
-          <FaMapLocation className="text-lg" />
-          Deliver to {userName}
-        </button>
-      </li>
+
       <li>
         <input
           id="search"

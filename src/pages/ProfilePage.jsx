@@ -3,11 +3,13 @@ import {
   FaUserCircle,
 } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
+import Address from "../components/Address"
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("personal");
   const [isEditing, setIsEditing] = useState(false);
   const [orders, setOrders] = useState([]);
+  const [address, setAddress] = useState([]);
 
   // State to control sidebar visibility on mobile
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -97,7 +99,7 @@ const formatDate = (iso) => {
 };
 
 const orderTotal = (order) => {
-  return (order.price || 0) * (order.quantity || 1);
+  return (order.originalPrice || 0) * (order.quantity || 1);
 };
 
 const grandTotal = orders.reduce((sum, o) => sum + orderTotal(o), 0);
@@ -155,7 +157,18 @@ const grandTotal = orders.reduce((sum, o) => sum + orderTotal(o), 0);
           >
             Order History
           </button>
-        </nav>
+
+        <button
+  className={`block w-full text-center md:text-left font-medium p-2 rounded-lg transition-colors ${
+    activeTab === "address"
+      ? "text-white bg-amber-600"
+      : "hover:bg-gray-100 hover:text-amber-600"
+  }`}
+  onClick={() => { setActiveTab("address"); setIsSidebarOpen(false); }}
+>
+  Manage Address
+</button>
+      </nav>
 
        
       </aside>
@@ -326,18 +339,19 @@ const grandTotal = orders.reduce((sum, o) => sum + orderTotal(o), 0);
       <div className="col-span-8">
         <div className="font-semibold text-base">{o.title}</div>
         <div className="text-xs text-gray-500">
-          Purchased: {formatDate(o.purchasedAt)}
+          Purchased: {formatDate(o.placedAt)}
         </div>
       </div>
 
       {/* Qty */}
       <div className="col-span-1 text-right text-sm text-gray-500">
-        {o.quantity}
+        <span>Qty: {o.quantity || 1}</span>
       </div>
 
       {/* Price */}
       <div className="col-span-1 text-right text-sm text-gray-700">
-        ₹{o.price.toFixed(2)}
+        ₹{(o.originalPrice || 0).toFixed(2)}
+
       </div>
 
       {/* Total */}
@@ -355,8 +369,9 @@ const grandTotal = orders.reduce((sum, o) => sum + orderTotal(o), 0);
         </div>
       </div>
       <div className="flex justify-between text-sm text-gray-600">
-        <span>Qty: {o.quantity}</span>
-        <span>₹{o.price.toFixed(2)}</span>
+        <span>Qty: {o.quantity || 1}</span>
+        <span>₹{(o.originalPrice || 0).toFixed(2)}
+</span>
         <span className="font-semibold text-gray-800">
           ₹{orderTotal(o).toFixed(2)}
         </span>
@@ -372,6 +387,17 @@ const grandTotal = orders.reduce((sum, o) => sum + orderTotal(o), 0);
             </div>
           </section>
         )}
+
+{activeTab === "address" && (
+  <section>
+    <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
+      Manage Addresses
+    </h2>
+
+    <Address />
+  </section>
+)}
+
       </main>
 <ToastContainer
 position="bottom-right"

@@ -15,6 +15,7 @@ import ProfilePage from "./pages/ProfilePage.jsx"
 import AllProducts from "./pages/AllProducts.jsx"
 import SearchResults from "./pages/SearchResults.jsx"
 import Products from './pages/Products.jsx'
+import CheckoutPage from "./pages/CheckoutPage.jsx"
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: "newProductDetails/:id",
         element:<Products/>
+      },
+      {
+        path:"checkout",
+        element:<CheckoutPage/>
       }
     ]
   }

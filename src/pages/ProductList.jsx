@@ -145,49 +145,50 @@ const ProductList = ({ isWished }) => {
             No books found for "{genre || "this category"}".
           </p>
         ) : (
-             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto cursor-pointer">
             {books.map((book) => (
               <div
-                key={book._id || book.id}
-                className="rounded-2xl shadow-lg flex flex-col items-center justify-center p-3 sm:p-4 hover:bg-amber-300 hover:shadow-2xl transition-all"
-              >
-                {/* <Link to={`/product/${book._id || book.id}`} className="w-full flex flex-col items-center"> */}
-                  <img
-                    className="h-48 sm:h-56 md:h-64 w-full rounded-2xl mb-3 object-cover"
-                    src={book.imageUrl}
-                    alt={book.title}
-                  />
-                  <h4 className="text-gray-700 font-semibold text-center hover:underline text-sm sm:text-base truncate w-full px-1">
-                    {book.title}
-                  </h4>
-                {/* </Link> */}
+  key={book._id || book.id}
+  className="rounded-2xl shadow-lg flex flex-col items-center justify-center p-3 sm:p-4 hover:bg-amber-300 hover:shadow-2xl transition-all"
+>
+  <Link
+    to={`/newProductDetails/${book._id || book.id}`}
+    className="w-full flex flex-col items-center cursor-pointer"
+  >
+    <img
+      className="h-48 sm:h-56 md:h-64 w-full rounded-2xl mb-3 object-cover"
+      src={book.imageUrl}
+      alt={book.title}
+    />
+    <h4 className="text-gray-700 font-semibold text-center hover:underline text-sm sm:text-base truncate w-full px-1">
+      {book.title}
+    </h4>
+    <p className="text-gray-700 text-xs sm:text-sm mb-2 text-center">by {book.author}</p>
+  </Link>
 
-                <p className="text-gray-700 text-xs sm:text-sm mb-2 text-center">by {book.author}</p>
+  <div className="flex flex-row gap-2 sm:gap-4 my-4 sm:my-6 items-center">
+    <p className="text-gray-800 font-semibold text-sm sm:text-base">₹ {book.originalPrice}</p>
+    <p className="text-gray-800 flex items-center gap-1 text-xs sm:text-base">
+      {book.rating || 0}
+      <FaStar className="text-yellow-500 text-xs sm:text-base" />
+    </p>
 
-                <div className="flex flex-row gap-2 sm:gap-4 my-4 sm:my-6 items-center">
-                  <p className="text-gray-800 font-semibold text-sm sm:text-base">₹ {book.originalPrice}</p>
-                  <p className="text-gray-800 flex items-center gap-1 text-xs sm:text-base">
-                    {book.rating || 0}
-                    <FaStar className="text-yellow-500 text-xs sm:text-base" />
-                  </p>
+    <button
+      onClick={() => handleAddToWishlist(book)}
+      className="text-red-900 text-xl sm:text-2xl rounded-full cursor-pointer hover:scale-110 transition-transform cursor-pointer"
+    >
+      {isInWishlist(book._id) ? <FaHeart /> : <FaRegHeart />}
+    </button>
+  </div>
 
-                  {/* Wishlist */}
-                  <button
-                    onClick={() => handleAddToWishlist(book)}
-                    className="text-red-900 text-xl sm:text-2xl rounded-full cursor-pointer hover:scale-110 transition-transform"
-                  >
-                    {isInWishlist(book._id) ? <FaHeart /> : <FaRegHeart />}
-                  </button>
-                </div>
+  <button
+    onClick={() => handleAddToCart(book)}
+    className="text-white bg-amber-800 px-3 py-1 text-sm sm:text-base rounded-lg w-full hover:bg-amber-900 cursor-pointer"
+  >
+    {isInCart(book._id) ? "In Cart " : "Add to Cart"}
+  </button>
+</div>
 
-                {/*  Add to Cart */}
-                <button
-                  onClick={() => handleAddToCart(book)}
-                  className="text-white bg-amber-800 px-3 py-1 text-sm sm:text-base rounded-lg w-full hover:bg-amber-900 cursor-pointer"
-                >
-                  {isInCart(book._id) ? "In Cart " : "Add to Cart"}
-                </button>
-              </div>
             ))}
           </div>
         )}

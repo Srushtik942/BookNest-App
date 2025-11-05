@@ -10,13 +10,14 @@ const CartPage = () => {
   const [showSummary, setShowSummary] = useState(false);
 
 
-  const deliveryCharges = 499;
+  const deliveryCharges = 299;
 
-  const subtotal = books.reduce((acc,book)=> acc + (book.originalPrice)*quantity,0)
+  const subtotal = books.reduce((acc,book)=> acc + (book.originalPrice)*(book.quantity || 1),0)
 
   const totalDiscount = books.reduce((acc, book) => {
   const oldPrice = book.oldPrice || (book.originalPrice / 0.7);
-  const discountPerBook = (oldPrice - book.originalPrice) * quantity;
+  const qty = book.quantity || 1;
+  const discountPerBook = (oldPrice - book.originalPrice) * qty;
   return acc + (discountPerBook > 0 ? discountPerBook : 0);
 }, 0);
 
@@ -25,13 +26,13 @@ const CartPage = () => {
   const savings = totalDiscount;
 
   const handleClick = () => {
-    toast.success("🎉 Congratulations, your order has been placed successfully!");
+    // toast.success("🎉 Congratulations, your order has been placed successfully!");
     setShowSummary(true);
     const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
     const newOrders = books.map((book) => ({
       id: book._id || Math.random(),
       ...book,
-      quantity,
+      quantity: book.quantity || 1,
       price: book.originalPrice || 0,
       purchasedAt: new Date().toISOString(),
     }));
@@ -40,6 +41,24 @@ const CartPage = () => {
 
 
   };
+  const handleIncrease = (id) => {
+  const updated = books.map(b =>
+    b._id === id ? { ...b, quantity: (b.quantity || 1) + 1 } : b
+  );
+  setBooks(updated);
+  localStorage.setItem("cart", JSON.stringify(updated));
+};
+
+const handleDecrease = (id) => {
+  const updated = books.map(b =>
+    b._id === id && (b.quantity || 1) > 1
+      ? { ...b, quantity: b.quantity - 1 }
+      : b
+  );
+  setBooks(updated);
+  localStorage.setItem("cart", JSON.stringify(updated));
+};
+
 
 
 
@@ -59,8 +78,8 @@ const CartPage = () => {
     wishlist.push(book);
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
-      window.dispatchEvent(new Event("wishlistUpdated"));
-  window.dispatchEvent(new Event("cartUpdated"));
+    window.dispatchEvent(new Event("wishlistUpdated"));
+    window.dispatchEvent(new Event("cartUpdated"));
 
     // remove from cart
 
@@ -148,18 +167,16 @@ const CartPage = () => {
                         </span>
                         <div className="flex items-center border border-black rounded">
                           <button
-                            onClick={() =>
-                              setQuantity(quantity > 1 ? quantity - 1 : 1)
-                            }
+                            onClick={() => handleDecrease(book._id)}
                             className="px-3 py-1 text-lg text-black hover:bg-gray-100 rounded-l transition"
                           >
                             -
                           </button>
                           <span className="px-4 text-black border-l border-r border-black">
-                            {quantity}
+                            {book.quantity || 1}
                           </span>
                           <button
-                            onClick={() => setQuantity(quantity + 1)}
+                            onClick={() => handleIncrease(book._id)}
                             className="px-3 py-1 text-lg text-black hover:bg-gray-100 rounded-r transition"
                           >
                             +
@@ -214,12 +231,13 @@ const CartPage = () => {
               <p className="text-green-600 mb-4 font-medium border-t pt-4">
                 You will save ₹{savings.toFixed(2)} on this order!
               </p>
-              <button
-                onClick={handleClick}
-                className="w-full bg-blue-600 text-white py-3 rounded font-semibold hover:bg-blue-700 transition duration-150 cursor-pointer"
-              >
-                PLACE ORDER
-              </button>
+             <Link
+  to="/checkout"
+  className="flex justify-center w-full bg-blue-600 text-white py-3 rounded font-semibold hover:bg-blue-700 transition duration-150"
+>
+  Checkout
+</Link>
+
             </div>
           </>
         ) : (

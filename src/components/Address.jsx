@@ -26,8 +26,6 @@ const Address = () => {
 
   return (
     <div className='py-4 my-4 mx-20'>
-      <h1 className='text-black text-start my-4 text-4xl font-bold'>Your Addresses</h1>
-
       <div className="flex gap-4 flex-wrap">
         {/* Add Address button */}
         <div
