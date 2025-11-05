@@ -115,9 +115,8 @@ const handleCategoryChange = async (event) => {
   };
 
   return (
-<div className="p-4 w-60 md:w-64 lg:w-72 bg-white shadow-md rounded-xl border border-gray-200 h-fit">
-      {/* Header */}
-<div className="flex justify-between items-center border-b border-gray-300 pb-2">
+<div className="p-4 w-60 md:w-56 bg-white shadow-md rounded-xl border border-gray-200 h-fit">      {/* Header */}
+<div className="flex justify-between items-center  border-gray-300 pb-2">
         <h2 className="font-bold text-gray-800 text-xl pb-3 text-left">
           Filters
         </h2>

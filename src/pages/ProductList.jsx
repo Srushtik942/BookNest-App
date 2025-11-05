@@ -126,22 +126,18 @@ const ProductList = ({ isWished }) => {
 
 {/* Sidebar */}
 <div
-  className={`fixed top-0 left-0 h-full z-50 bg-white shadow-lg
-  w-64 md:w-1/4
+  className={`fixed top-0 left-0 h-fit z-50 bg-white shadow-lg
+  w-56 md:w-56
   transition-transform duration-300
-  ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
-  md:translate-x-0 md:static`}
+  ${isSidebarOpen ? "translate-x-0 " : "-translate-x-full hidden"}
+  md:translate-x-0 md:static md:block`}
 >
   <Sidebar setFilteredBooks={setBooks} setIsSidebarOpen={setIsSidebarOpen} />
 </div>
 
 
       {/* Main Content */}
-      <div className="w-full md:w-3/4 p-4 sm:p-6 lg:p-10">
-        {/* <h2 className="text-gray-700 pb-4 text-2xl sm:text-3xl playfair-heading text-center mt-12 md:mt-0 mb-6 sm:mb-10">
-          {genre ? `Books in ${genre}` : "All Books"}
-        </h2> */}
-
+      <div className="w-full md:w-3/4 p-4 sm:p-6 lg:p-10 md:flex-grow">
         {loading ? (
           <p className="text-center text-gray-600 text-lg sm:text-xl mt-10">
             Fetching books for {genre}...
@@ -209,7 +205,7 @@ const ProductList = ({ isWished }) => {
   pauseOnFocusLoss
   draggable
   pauseOnHover
-  toastClassName="w-[90vw] sm:w-auto" 
+  toastClassName="w-[90vw] sm:w-auto"
       />
     </div>
   );

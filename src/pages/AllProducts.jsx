@@ -91,7 +91,7 @@ const ProductList = () => {
       {/* Sidebar */}
       {!isSidebarOpen && (
       <button
-        className="md:hidden fixed top-20 left-4 z-50 p-2  rounded-md shadow-md text-black"
+        className="md:hidden fixed top-16 left-2 z-50 p-2  rounded-md shadow-md text-black"
         onClick={() => setIsSidebarOpen(true)}
       >
         ☰
@@ -108,25 +108,26 @@ const ProductList = () => {
 
 {/* Sidebar */}
 <div
-  className={`fixed top-0 left-0 h-full z-50 bg-white shadow-lg
-  w-64 md:w-1/4
+  className={`fixed top-0 left-0 h-fit z-50 bg-white
+  w-56 md:w-64
   transition-transform duration-300
-  ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
-  md:translate-x-0 md:static`}
+  ${isSidebarOpen ? "translate-x-0" : "-translate-x-full hidden"}
+  md:translate-x-0 md:static md:block`}
 >
   <Sidebar setFilteredBooks={setBooks} setIsSidebarOpen={setIsSidebarOpen} />
 </div>
 
 
-     {isSidebarOpen && (
+
+     {/* {isSidebarOpen && (
       <div
         className="fixed inset-0 bg-opacity-40 z-30 md:hidden"
         onClick={() => setIsSidebarOpen(false)}
       ></div>
-    )}
+    )} */}
 
       {/* Main Content */}
-      <div className="w-full md:w-3/4">
+      <div className="w-full md:flex:grow">
         {loading ? (
           <p className="text-center text-gray-500">Loading books...</p>
         ) : (

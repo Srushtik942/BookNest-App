@@ -101,10 +101,10 @@ const Navbar = () => {
 
         </ul>
 
-        {/* Right Section: Search + Icons */}
+        {/* Search + Icons */}
       <div className="flex items-center gap-2 sm:gap-4 md:gap-6">
-          {/* Search Input */}
-          <div className="relative hidden sm:block">
+        
+          <div className="relative hidden sm:block ">
             <input
               id="search"
               type="text"
@@ -148,13 +148,7 @@ const Navbar = () => {
               {cartCount}
             </span>
           </button>
-          {/* location
-          <button>
-            <Link to="/addAddress">
-            <FaLocationDot size={25} className="text-gray-800 hover:text-amber-700"/>
-            <span className="absolute -top-2 left-24 bg-red-500 text-white text-xs rounded-full px-1" >{addressCount}</span>
-            </Link>
-          </button> */}
+
 
           {/* Profile */}
           <Link to="/profile">
@@ -162,7 +156,7 @@ const Navbar = () => {
           </Link>
           </div>
 
-          {/* Hamburger Icon (Mobile) */}
+          {/* Hamburger */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden text-gray-800 text-2xl ml-2 focus:outline-none"
@@ -172,7 +166,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Dropdown Menu */}
       {/* Mobile Dropdown Menu */}
 {isMenuOpen && (
   <div className="fixed top-16 left-0 w-full bg-amber-50 border-t border-gray-200 shadow-md z-40">
@@ -187,18 +180,6 @@ const Navbar = () => {
           Products
         </Link>
       </li>
-
-      {/* <li>
-        <input
-          id="search"
-          type="text"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyDown={handleSearchKeyDown}
-          className="w-60 border border-gray-300 text-black rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-amber-400"
-        />
-      </li> */}
 
       <li className="relative w-60">
   <input
