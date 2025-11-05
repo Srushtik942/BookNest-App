@@ -98,14 +98,25 @@ const ProductList = () => {
       </button>
     )}
 
-     <div
-      className={`fixed md:static top-0 left-0 h-full md:h-auto z-40 md:z-auto transition-transform duration-300 w-3/4 md:w-1/4 rounded-xl shadow-lg md:shadow-none
-      ${isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
-    >
+    {/* Mobile Overlay */}
+{isSidebarOpen && (
+  <div
+    className="fixed inset-0 bg-black/40 z-40 md:hidden"
+    onClick={() => setIsSidebarOpen(false)}
+  />
+)}
 
+{/* Sidebar */}
+<div
+  className={`fixed top-0 left-0 h-full z-50 bg-white shadow-lg
+  w-64 md:w-1/4
+  transition-transform duration-300
+  ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+  md:translate-x-0 md:static`}
+>
+  <Sidebar setFilteredBooks={setBooks} setIsSidebarOpen={setIsSidebarOpen} />
+</div>
 
-      <Sidebar setFilteredBooks={setBooks} setIsSidebarOpen={setIsSidebarOpen} />
-    </div>
 
      {isSidebarOpen && (
       <div

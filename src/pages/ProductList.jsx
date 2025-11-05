@@ -116,19 +116,25 @@ const ProductList = ({ isWished }) => {
 
 
       {/* Sidebar */}
-      <div
-        className={`
-          fixed md:relative
-          top-0 left-0 h-full
-          ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-          md:translate-x-0
-          w-3/4 md:w-1/4
-         rounded-r-xl md:rounded-xl
-          z-10 transition-transform duration-300 ease-in-out p-4 md:p-0
-        `}
-      >
-        <Sidebar setFilteredBooks={setBooks} setIsSidebarOpen={setIsSidebarOpen} />
-      </div>
+      {/* Mobile  */}
+{isSidebarOpen && (
+  <div
+    className="fixed inset-0 bg-black/40 z-40 md:hidden"
+    onClick={() => setIsSidebarOpen(false)}
+  />
+)}
+
+{/* Sidebar */}
+<div
+  className={`fixed top-0 left-0 h-full z-50 bg-white shadow-lg
+  w-64 md:w-1/4
+  transition-transform duration-300
+  ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+  md:translate-x-0 md:static`}
+>
+  <Sidebar setFilteredBooks={setBooks} setIsSidebarOpen={setIsSidebarOpen} />
+</div>
+
 
       {/* Main Content */}
       <div className="w-full md:w-3/4 p-4 sm:p-6 lg:p-10">
@@ -193,6 +199,18 @@ const ProductList = ({ isWished }) => {
           </div>
         )}
       </div>
+      <ToastContainer
+       position="top-center"
+  autoClose={2000}
+  hideProgressBar={false}
+  newestOnTop={false}
+  closeOnClick
+  rtl={false}
+  pauseOnFocusLoss
+  draggable
+  pauseOnHover
+  toastClassName="w-[90vw] sm:w-auto" 
+      />
     </div>
   );
 };

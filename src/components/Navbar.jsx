@@ -188,7 +188,7 @@ const Navbar = () => {
         </Link>
       </li>
 
-      <li>
+      {/* <li>
         <input
           id="search"
           type="text"
@@ -198,7 +198,32 @@ const Navbar = () => {
           onKeyDown={handleSearchKeyDown}
           className="w-60 border border-gray-300 text-black rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-amber-400"
         />
-      </li>
+      </li> */}
+
+      <li className="relative w-60">
+  <input
+    id="search"
+    type="text"
+    placeholder="Search..."
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+    onKeyDown={handleSearchKeyDown}
+    className="w-full border border-gray-300 text-black rounded px-2 py-1 pr-6 focus:outline-none focus:ring-2 focus:ring-amber-400"
+  />
+
+  {searchQuery && (
+    <button
+      onClick={() => {
+        setSearchQuery("");
+        navigate("/");
+      }}
+      className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black text-lg"
+    >
+      ×
+    </button>
+  )}
+</li>
+
     </ul>
   </div>
 )}
