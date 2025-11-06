@@ -35,6 +35,7 @@ A modern and responsive online bookstore UI that allows users to browse books, m
 
 ## 📂 Folder Structure
 
+```
 BookNest-App/
 ├─ public/
 │ └─ index.html
@@ -43,10 +44,15 @@ BookNest-App/
 │ ├─ pages/
 │ ├─ assets/
 │ ├─ styles/
-│ └─ App.jsx
+│ ├─ App.jsx
+│ └─ main.jsx
+├─ .env
 ├─ package.json
+├─ tailwind.config.js
 ├─ vite.config.js
-└─ tailwind.config.js
+└─ README.md
+
+```
 
 
 ---
