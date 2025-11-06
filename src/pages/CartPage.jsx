@@ -83,7 +83,7 @@ const handleDecrease = (id) => {
 
     // remove from cart
 
-    toast("Book moved to wishlist!");
+    // toast("Book moved to wishlist!");
   };
 
   // Fetch cart data from localStorage

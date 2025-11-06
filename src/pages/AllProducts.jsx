@@ -108,7 +108,7 @@ const ProductList = () => {
 
 {/* Sidebar */}
 <div
-  className={`fixed top-0 left-0 h-fit z-50 bg-white
+  className={` top-0 left-0 h-fit z-50 bg-white
   w-56 md:w-64
   transition-transform duration-300
   ${isSidebarOpen ? "translate-x-0" : "-translate-x-full hidden"}
@@ -193,7 +193,7 @@ const ProductList = () => {
           </div>
         )}
       </div>
-{/* 
+{/*
       <ToastContainer
        autoClose={2000}
       /> */}

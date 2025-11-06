@@ -19,7 +19,7 @@ const WishlistPage = () => {
     // Notify Navbar
     window.dispatchEvent(new Event("wishlistUpdated"));
 
-    toast.info("Book removed from wishlist!");
+    // toast.info("Book removed from wishlist!");
   };
 
   // Move book to cart

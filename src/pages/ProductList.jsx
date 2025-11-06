@@ -126,7 +126,7 @@ const ProductList = ({ isWished }) => {
 
 {/* Sidebar */}
 <div
-  className={`fixed top-0 left-0 h-fit z-50 bg-white shadow-lg
+  className={`absolute  top-0 left-0 h-fit z-50 bg-white shadow-lg
   w-56 md:w-56
   transition-transform duration-300
   ${isSidebarOpen ? "translate-x-0 " : "-translate-x-full hidden"}

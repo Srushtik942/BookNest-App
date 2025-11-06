@@ -102,7 +102,7 @@ const orderTotal = (order) => {
   return (order.originalPrice || 0) * (order.quantity || 1);
 };
 
-const grandTotal = orders.reduce((sum, o) => sum + orderTotal(o), 0);
+// const grandTotal = orders.reduce((sum, o) => sum + orderTotal(o), 0);
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 relative">
@@ -379,9 +379,7 @@ const grandTotal = orders.reduce((sum, o) => sum + orderTotal(o), 0);
     </div>
   </div>
 ))}
-                  <div className="bg-white p-4 rounded-xl border shadow-sm text-gray-800 text-right font-semibold text-lg">
-                    Grand Total: ₹{grandTotal.toFixed(2)}
-                  </div>
+                 
                 </>
               )}
             </div>
