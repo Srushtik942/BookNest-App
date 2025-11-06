@@ -1,16 +1,71 @@
-# React + Vite
+# 📚 BookNest — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive online bookstore UI that allows users to browse books, manage favorites, and place orders with an elegant and intuitive interface.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##  Live Link
+> https://book-nest-app-plum.vercel.app/
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+| Technology | Description |
+|-----------|------------|
+| React (Vite) | Frontend Framework |
+| Tailwind CSS | UI Styling |
+| LocalStorage | Order summary and user data persistence |
+| React Router | Navigation |
+| Node.js + npm | Development environment |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ⭐ Features
+
+- 📚 Browse, search, and filter books
+- 📄 View detailed book information
+- ❤️ Add books to favourites & reading list
+- 🛒 **Place orders**
+- 💾 **Order summary stored in LocalStorage**
+- 📱 Fully responsive (mobile + desktop)
+- 🔐 API integrated with backend services
+
+---
+
+## 📂 Folder Structure
+
+BookNest-App/
+├─ public/
+│ └─ index.html
+├─ src/
+│ ├─ components/
+│ ├─ pages/
+│ ├─ assets/
+│ ├─ styles/
+│ └─ App.jsx
+├─ package.json
+├─ vite.config.js
+└─ tailwind.config.js
+
+
+---
+
+## 🔧 Installation & Setup
+
+```bash
+git clone https://github.com/Srushtik942/BookNest-App.git
+cd BookNest-App
+npm install
+npm run dev
+```
+
+⚙️ Build for Production
+
+npm run build
+
+🔑 Environment Variables
+
+VITE_API_BASE_URL=https://your-backend-url.com
+
+
