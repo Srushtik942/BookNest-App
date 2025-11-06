@@ -33,6 +33,22 @@ A modern and responsive online bookstore UI that allows users to browse books, m
 
 ---
 
+## 📸 Screenshots
+
+### 🏠 Home Page
+![Home Page](./screenshots//Home%20Page//image.png)
+
+### 📚 Book Details Page
+![Book Details](./screenshots/Home%20Page//image%20copy.png)
+![Book Details](./screenshots/Home%20Page//image%20copy.png)
+
+
+
+### 🛒 Order / Cart Page
+![Order Summary](./screenshots/cart//image.png)
+
+
+
 ## 📂 Folder Structure
 
 ```
