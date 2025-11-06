@@ -308,7 +308,7 @@ const handleDecrease = (id) => {
     </div>
   </div>
 )}
- <ToastContainer
+ {/* <ToastContainer
       //  position="bottom-right"
       autoClose={2000}
       hideProgressBar={false}
@@ -319,7 +319,7 @@ const handleDecrease = (id) => {
       draggable
       pauseOnHover
       theme="light"
-      />
+      /> */}
     </div>
   );
 };

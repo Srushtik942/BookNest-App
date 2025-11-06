@@ -10,21 +10,21 @@ function App() {
   return (
     <>
       <AddressProvider>
-        <Navbar />
-        <div className="pt-22">
+        <Navbar className="overflow-x: hidden;" />
+        <div className="pt-22 ">
           <Outlet />
         </div>
         <Footer />
-
-        {/* ✅ Single global Toast container */}
-        {/* <ToastContainer
-          position="bottom-right"
-          autoClose={2000}
-          hideProgressBar={false}
-          closeOnClick
-          pauseOnHover
-        /> */}
       </AddressProvider>
+         <ToastContainer
+  position={window.innerWidth <= 768 ? "bottom-center" : "bottom-right"}
+  autoClose={2000}
+  hideProgressBar={false}
+  pauseOnHover
+  closeOnClick
+  toastClassName="w-[90vw] sm:w-auto"
+/>
+
     </>
   );
 }

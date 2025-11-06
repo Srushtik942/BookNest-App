@@ -132,8 +132,8 @@ const WishlistPage = () => {
         )}
 
         {/*Keep only one ToastContainer here */}
-        <ToastContainer
-        />
+        {/* <ToastContainer
+        /> */}
       </div>
     </div>
   );

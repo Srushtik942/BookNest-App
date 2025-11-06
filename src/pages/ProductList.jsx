@@ -195,7 +195,7 @@ const ProductList = ({ isWished }) => {
           </div>
         )}
       </div>
-      <ToastContainer
+      {/* <ToastContainer
        position="top-center"
   autoClose={2000}
   hideProgressBar={false}
@@ -206,7 +206,7 @@ const ProductList = ({ isWished }) => {
   draggable
   pauseOnHover
   toastClassName="w-[90vw] sm:w-auto"
-      />
+      /> */}
     </div>
   );
 };

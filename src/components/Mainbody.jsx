@@ -12,9 +12,21 @@ const Mainbody = () => {
   const [booksRate, setBooksRate] = useState([]);
   const [wishlist, setWishlist] = useState([]);
   const [addToCart, setAddToCart] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_BASE_URL;
+
+useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
 
   // ✅ Safely get wishlist from localStorage
   const getWishlistFromLocalStorage = () => {
@@ -295,18 +307,18 @@ const Mainbody = () => {
           ))}
         </div>
       </div>
- <ToastContainer
-      position="bottom-right"
-      autoClose={2000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-       pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="light"
-    />
+{/* <ToastContainer
+        position={isMobile ? "top-center" : "bottom-right"}
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      /> */}
     </div>
   );
 }

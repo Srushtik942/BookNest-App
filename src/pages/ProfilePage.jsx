@@ -399,9 +399,9 @@ const grandTotal = orders.reduce((sum, o) => sum + orderTotal(o), 0);
 )}
 
       </main>
-<ToastContainer
+{/* <ToastContainer
 position="bottom-right"
-/>
+/> */}
     </div>
   );
 };
