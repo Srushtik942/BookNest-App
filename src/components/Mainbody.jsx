@@ -150,12 +150,12 @@ useEffect(() => {
         const updatedWishlist = wishlist.filter(item => item._id !== book._id);
         setWishlist(updatedWishlist);
         saveWishlistToLocalStorage(updatedWishlist);
-        toast("Book removed from wishlist!");
+//         toast("Book removed from wishlist!");
       } else {
         const updatedWishlist = [...wishlist, book];
         setWishlist(updatedWishlist);
         saveWishlistToLocalStorage(updatedWishlist);
-        toast("Book added to wishlist!");
+//         toast("Book added to wishlist!");
       }
     } catch (error) {
       console.error("Error managing wishlist:", error);

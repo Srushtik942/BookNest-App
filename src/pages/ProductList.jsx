@@ -47,12 +47,12 @@ const ProductList = ({ isWished }) => {
       const updatedWishlist = wishlist.filter((item) => item._id !== book._id);
       setWishlist(updatedWishlist);
       saveToLocalStorage("wishlist", updatedWishlist);
-      toast("Book removed from wishlist!");
+      // toast("Book removed from wishlist!");
     } else {
       const updatedWishlist = [...wishlist, book];
       setWishlist(updatedWishlist);
       saveToLocalStorage("wishlist", updatedWishlist);
-      toast("Book added to wishlist!");
+      // toast("Book added to wishlist!");
     }
   };
 
