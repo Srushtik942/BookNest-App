@@ -147,7 +147,7 @@ const handlePlaceOrder = () => {
             <div className="flex-1">
               <p className="font-semibold text-gray-800">{item.title}</p>
               <p className="text-sm text-gray-500">{item.author}</p>
-              <p className="text-sm text-gray-700">Qty: {item.quantity}</p>
+              {/* <p className="text-sm text-gray-700">Qty: {item.quantity}</p> */}
             </div>
             <p className="font-semibold text-gray-800">₹{item.originalPrice}</p>
           </div>
