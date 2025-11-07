@@ -63,7 +63,7 @@ const ProductList = ({ isWished }) => {
     const updatedCart = [...cart, book];
     setCart(updatedCart);
     saveToLocalStorage("cart", updatedCart);
-    toast("Book added to cart!");
+    // toast("Book added to cart!");
   };
 
 
@@ -107,9 +107,6 @@ const ProductList = ({ isWished }) => {
   ☰
 </button>
 )}
-
-
-
 
       {/* Sidebar */}
       {/* Mobile  */}
