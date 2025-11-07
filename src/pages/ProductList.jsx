@@ -96,7 +96,7 @@ const ProductList = ({ isWished }) => {
 
 
   return (
-    <div className="flex min-h-screen relative">
+    <div className="flex  min-h-screen relative">
 
 {/* Sidebar Toggle for Mobile */}
 {!isSidebarOpen && (
@@ -140,7 +140,7 @@ const ProductList = ({ isWished }) => {
             No books found for "{genre || "this category"}".
           </p>
         ) : (
-             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto cursor-pointer">
+           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto cursor-pointer">
             {books.map((book) => (
               <div
   key={book._id || book.id}
