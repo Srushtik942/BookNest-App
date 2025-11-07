@@ -69,7 +69,7 @@ const handleDecrease = (id) => {
 
     window.dispatchEvent(new Event("cartUpdated"));
 
-   if (showToast) toast.info("Book removed from cart!");
+  //  if (showToast) toast.info("Book removed from cart!");
   };
 
   const handleMoveToWishlist = (book) => {
