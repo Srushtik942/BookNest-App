@@ -50,10 +50,10 @@ const Products = () => {
     let updatedWishlist;
     if (isAlreadyWished) {
       updatedWishlist = storedWishlist.filter((item) => item._id !== book._id);
-      toast.info("Book removed from wishlist!");
+      // toast.info("Book removed from wishlist!");
     } else {
       updatedWishlist = [...storedWishlist, book];
-      toast.success("Book added to wishlist!");
+      // toast.success("Book added to wishlist!");
     }
 
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
@@ -74,7 +74,7 @@ const Products = () => {
     storedCart.push(book);
     localStorage.setItem("cart", JSON.stringify(storedCart));
     window.dispatchEvent(new Event("cartUpdated"));
-    toast.success("Book added to cart!");
+    // toast.success("Book added to cart!");
   };
 
   if (loading)
@@ -153,7 +153,9 @@ const Products = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer
+      autoClose={2000}
+      />
     </div>
   );
 };
