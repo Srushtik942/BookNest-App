@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import Navbar from "../components/Navbar";
 import { FaHeart, FaRegHeart, FaStar } from "react-icons/fa";
@@ -47,12 +45,10 @@ const ProductList = ({ isWished }) => {
       const updatedWishlist = wishlist.filter((item) => item._id !== book._id);
       setWishlist(updatedWishlist);
       saveToLocalStorage("wishlist", updatedWishlist);
-      // toast("Book removed from wishlist!");
     } else {
       const updatedWishlist = [...wishlist, book];
       setWishlist(updatedWishlist);
       saveToLocalStorage("wishlist", updatedWishlist);
-      // toast("Book added to wishlist!");
     }
   };
 
@@ -147,7 +143,7 @@ const ProductList = ({ isWished }) => {
             No books found for "{genre || "this category"}".
           </p>
         ) : (
-             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto cursor-pointer">
+             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto cursor-pointer">
             {books.map((book) => (
               <div
   key={book._id || book.id}
@@ -195,18 +191,7 @@ const ProductList = ({ isWished }) => {
           </div>
         )}
       </div>
-      {/* <ToastContainer
-       position="top-center"
-  autoClose={2000}
-  hideProgressBar={false}
-  newestOnTop={false}
-  closeOnClick
-  rtl={false}
-  pauseOnFocusLoss
-  draggable
-  pauseOnHover
-  toastClassName="w-[90vw] sm:w-auto"
-      /> */}
+
     </div>
   );
 };
