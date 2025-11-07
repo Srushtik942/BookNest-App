@@ -137,7 +137,7 @@ useEffect(() => {
       const updatedCart = [...existingCart, cleanBook];
       setAddToCart(updatedCart);
       isInLocalStorage(updatedCart);
-      toast("Book added to cart!");
+//       toast("Book added to cart!");
     } catch (error) {
       console.log("Error adding to cart", error);
     }
